@@ -19,7 +19,7 @@
   var endDate = "2025-03-30";
   var currentPage = 1;
   var sdate = "SendDate";
-  var deName = "send_pro"; // <-- 🔧 Replace with your actual DE name
+  var deName = "send_pro_Copy"; // <-- 🔧 Replace with your actual DE name
 
   var sends = [];
   var totalCount = 0;
