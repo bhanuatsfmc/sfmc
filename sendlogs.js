@@ -19,7 +19,7 @@
   var endDate = "2025-03-31";
   var currentPage = 1;
   var sdate = "SendDate";
-  var deName = "send_pro_Copy"; // 
+  var deName = "F16FC2FB-F8FD-4137-B97C-6814278847E7"; // 
 
   var sends = [];
   var totalCount = 0;
