@@ -8,7 +8,7 @@ try {
     var filter = {
         Property: "SendDate",
         SimpleOperator: "between",
-        Value: ["2024-03-01T00:00:00", "2024-03-31T23:59:59"]
+        Value: ["2024-03-01T00:00:00", "2025-03-31T23:59:59"]
     };
 
     var result = ws.retrieve("Send", props, filter);
