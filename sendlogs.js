@@ -7,79 +7,77 @@
     th {background-color: #f2f2f2;}
   </style>
 </head>
-<body style="font-family:sans-serif;">
+<body>
 
 <script runat="server">
   Platform.Load("core", "1");
 
-  // Configuration
-  var batchSize = 10;
-  var dateFormat = "yyyy-MM-dd";
-  var startDate = "2025-02-25";
-  var endDate = "2025-03-31";
-  var currentPage = 1;
-  var sdate = "SendDate";
-  var deName = "F16FC2FB-F8FD-4137-B97C-6814278847E7"; // 
+  // Get URL params
+  var deKey = Request.GetQueryStringParameter("deKey") || "F16FC2FB-F8FD-4137-B97C-6814278847E7"; // Default
+  var startDateStr = Request.GetQueryStringParameter("startDate") || "2025-02-01";
+  var endDateStr = Request.GetQueryStringParameter("endDate") || "2025-03-31";
+  var currentPage = parseInt(Request.GetQueryStringParameter("page") || "1");
+  var pageSize = 10;
 
-  var sends = [];
-  var totalCount = 0;
-  var totalPages = 0;
+  // Convert to Date objects
+  var startDate = new Date(startDateStr + "T00:00:00");
+  var endDate = new Date(endDateStr + "T23:59:59");
 
-  if (startDate && endDate) {
-    try {
-      var proxy = new Script.Util.WSProxy();
-      var cols = ["SendID", "EmailName", "SendDate", "Subject"];
+  var de = DataExtension.Init(deKey);
+  var allRows = de.Rows.Retrieve();
 
-      var options = {
-        BatchSize: batchSize,
-        Page: currentPage
-      };
+  var filtered = [];
 
-     var filter = {
-    Property: sdate,
-    SimpleOperator: "between",
-    Value: [startDate + "T00:00:00", endDate + "T23:59:59"]
-};
-
-var result = proxy.retrieve("DataExtensionRow", ["SendID", "EmailName", "SendDate", "Subject"], {
-    Property: "CustomerKey",
-    SimpleOperator: "equals",
-    Value: deName
-}, filter);
-
-
-      if (result && result.Results) {
-        sends = result.Results;
-        totalCount = result.TotalCount || sends.length;
-        totalPages = Math.ceil(totalCount / batchSize);
-      }
-
-    } catch (e) {
-      Write("<p style='color:red;'>Error: " + Stringify(e) + "</p>");
+  // Manual filtering
+  for (var i = 0; i < allRows.length; i++) {
+    var rowDate = new Date(allRows[i]["SendDate"]);
+    if (rowDate >= startDate && rowDate <= endDate) {
+      filtered.push(allRows[i]);
     }
   }
 
-  // Render Output
-  if (sends.length > 0) {
-    Write("<table>");
-    Write("<thead><tr><th>SendID</th><th>Email Name</th><th>Send Date</th><th>Subject</th></tr></thead><tbody>");
+  var total = filtered.length;
+  var totalPages = Math.ceil(total / pageSize);
+  var startIndex = (currentPage - 1) * pageSize;
+  var pageRows = filtered.slice(startIndex, startIndex + pageSize);
 
-    for (var i = 0; i < sends.length; i++) {
-      var props = sends[i].Properties;
+  // Render
+  Write("<h3 style='text-align:center;'>Filtered Results</h3>");
+  Write("<p style='text-align:center;'>Records from " + startDateStr + " to " + endDateStr + " (Page " + currentPage + " of " + totalPages + ")</p>");
+
+  if (pageRows.length > 0) {
+    Write("<table><thead><tr><th>SendID</th><th>Email Name</th><th>Send Date</th><th>Subject</th></tr></thead><tbody>");
+
+    for (var j = 0; j < pageRows.length; j++) {
+      var row = pageRows[j];
       Write("<tr>");
-      Write("<td>" + props.Property("SendID") + "</td>");
-      Write("<td>" + props.Property("EmailName") + "</td>");
-      Write("<td>" + props.Property("SendDate") + "</td>");
-      Write("<td>" + props.Property("Subject") + "</td>");
+      Write("<td>" + row["SendID"] + "</td>");
+      Write("<td>" + row["EmailName"] + "</td>");
+      Write("<td>" + row["SendDate"] + "</td>");
+      Write("<td>" + row["Subject"] + "</td>");
       Write("</tr>");
     }
 
     Write("</tbody></table>");
-    Write("<p style='text-align:center;'>Page " + currentPage + " of " + totalPages + "</p>");
-  } else {
-    Write("<p style='text-align:center;'>No records found between " + startDate + " and " + endDate + "</p>");
-  }
 
+    // Pagination Links
+    var baseUrl = Request.GetUrl();
+    function makeLink(pageNum) {
+      return baseUrl + "?deKey=" + deKey + "&startDate=" + startDateStr + "&endDate=" + endDateStr + "&page=" + pageNum;
+    }
+
+    Write("<div style='text-align:center; margin-top:20px;'>");
+    if (currentPage > 1) {
+      Write("<a href='" + makeLink(currentPage - 1) + "'>Previous</a> ");
+    }
+    if (currentPage < totalPages) {
+      Write(" <a href='" + makeLink(currentPage + 1) + "'>Next</a>");
+    }
+    Write("</div>");
+
+  } else {
+    Write("<p style='text-align:center;'>No records found.</p>");
+  }
 </script>
 
 </body>
