@@ -46,11 +46,10 @@ var sdaten = "2025-03-01 00:00:00.000";
                 Page: currentPage
             };
             
-          var result = prox.retrieve("DataExtensionObject[" + deName + "]", cols, filter, options);
+          var result = prox.retrieve("DataExtensionObject[" + deName + "]", cols, filter);
           
             sends = result.Results;
-            totalCount = result.TotalCount;
-            totalPages = Math.ceil(totalCount / batchSize);
+
              Write("<p>Found " + result.Results.length + " records.</p>");
         } catch (e) {
   Platform.Response.Write("<br><br>e: " + Stringify(e));
