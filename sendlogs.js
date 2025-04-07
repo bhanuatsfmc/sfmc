@@ -28,6 +28,17 @@
     th {
       background-color: #f2f2f2;
     }
+    .pagination {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .pagination a {
+      margin: 0 5px;
+      text-decoration: none;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+    }
   </style>
 </head>
 <body>
@@ -36,14 +47,13 @@
 Platform.Load("core", "1");
 
 try {
-    // Get parameters from form (URL GET method)
     var deKey = Request.GetQueryStringParameter("deKey") || "F16FC2FB-F8FD-4137-B97C-6814278847E7";
     var startDateStr = Request.GetQueryStringParameter("startDate");
     var endDateStr = Request.GetQueryStringParameter("endDate");
     var currentPage = parseInt(Request.GetQueryStringParameter("page") || "1", 10);
     var pageSize = 10;
 
-    // Render form before any logic
+    // Form (always render)
     Write("<form method='get'>");
     Write("<input type='hidden' name='deKey' value='" + deKey + "' />");
     Write("Start Date: <input type='date' name='startDate' value='" + (startDateStr || "") + "' required />");
@@ -51,6 +61,7 @@ try {
     Write("<input type='submit' value='Filter' />");
     Write("</form>");
 
+    // Only process if both dates are provided
     if (startDateStr && endDateStr) {
         var startDate = new Date(startDateStr + "T00:00:00");
         var endDate = new Date(endDateStr + "T23:59:59");
@@ -60,7 +71,7 @@ try {
 
         var filtered = [];
 
-        // Manually filter based on SendDate
+        // Filter rows
         for (var i = 0; i < allRows.length; i++) {
             var row = allRows[i];
             var sendDateStr = row["SendDate"];
@@ -81,9 +92,8 @@ try {
         var startIndex = (currentPage - 1) * pageSize;
         var pageRows = filtered.slice(startIndex, startIndex + pageSize);
 
-        // Render table
         Write("<h3 style='text-align:center;'>Filtered Results</h3>");
-        Write("<p style='text-align:center;'>Showing records from " + startDateStr + " to " + endDateStr + " (Page " + currentPage + " of " + totalPages + ")</p>");
+        Write("<p style='text-align:center;'>Showing records from " + startDateStr + " to " + endDateStr + "</p>");
 
         if (pageRows.length > 0) {
             Write("<table><thead><tr><th>SendID</th><th>Email Name</th><th>Send Date</th><th>Subject</th></tr></thead><tbody>");
@@ -98,22 +108,27 @@ try {
             }
             Write("</tbody></table>");
 
-            // Pagination
-            var baseUrl = Request.GetUrl();
-            function makeLink(pageNum) {
-                return baseUrl + "?deKey=" + deKey + "&startDate=" + startDateStr + "&endDate=" + endDateStr + "&page=" + pageNum;
-            }
+            // Only show pagination if more than one page
+            if (totalPages > 1) {
+                var baseUrl = Request.GetUrl();
+                function makeLink(pageNum) {
+                    return baseUrl + "?deKey=" + deKey + "&startDate=" + startDateStr + "&endDate=" + endDateStr + "&page=" + pageNum;
+                }
 
-            Write("<div style='text-align:center; margin-top:20px;'>");
-            if (currentPage > 1) {
-                Write("<a href='" + makeLink(currentPage - 1) + "'>Previous</a> ");
+                Write("<div class='pagination'>");
+                if (currentPage > 1) {
+                    Write("<a href='" + makeLink(currentPage - 1) + "'>&laquo; Previous</a>");
+                }
+                for (var p = 1; p <= totalPages; p++) {
+                    Write("<a href='" + makeLink(p) + "'>" + p + "</a>");
+                }
+                if (currentPage < totalPages) {
+                    Write("<a href='" + makeLink(currentPage + 1) + "'>Next &raquo;</a>");
+                }
+                Write("</div>");
             }
-            if (currentPage < totalPages) {
-                Write("<a href='" + makeLink(currentPage + 1) + "'>Next</a>");
-            }
-            Write("</div>");
         } else {
-            Write("<p style='text-align:center;'>No records found for the selected date range.</p>");
+            Write("<p style='text-align:center;'>No records found in the selected date range.</p>");
         }
     }
 
