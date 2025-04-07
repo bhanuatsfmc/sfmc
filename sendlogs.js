@@ -1,4 +1,3 @@
-<!-- Inside the existing <script runat="server"> block -->
 <script runat="server">
 Platform.Load("core", "1");
 
@@ -24,40 +23,39 @@ try {
       BatchSize: 2500
     };
 
-    var retrieved = ws.retrieve("Send", props, filter, options);
-    var allResults = retrieved.Results || [];
-    var totalRecords = allResults.length;
+    var response = ws.retrieve("Send", props, filter, options);
+    var results = response && response.Results ? response.Results : [];
 
     // Manual pagination
+    var totalRecords = results.length;
     var totalPages = Math.ceil(totalRecords / pageSize);
     var startIndex = (currentPage - 1) * pageSize;
-    var pagedResults = allResults.slice(startIndex, startIndex + pageSize);
+    var pageResults = results.slice(startIndex, startIndex + pageSize);
 
     Write("<div id='ajaxContent'>");
 
-    if (pagedResults.length > 0) {
+    if (pageResults.length > 0) {
       Write("<table class='table table-bordered table-striped'>");
       Write("<thead class='table-light'><tr>");
       Write("<th>Send ID</th><th>Email Name</th><th>Subject</th><th>Send Date</th><th>From Name</th><th>From Address</th>");
       Write("</tr></thead><tbody>");
 
-      for (var i = 0; i < pagedResults.length; i++) {
-        var send = pagedResults[i];
+      for (var i = 0; i < pageResults.length; i++) {
+        var s = pageResults[i];
         Write("<tr>");
-        Write("<td>" + send.ID + "</td>");
-        Write("<td>" + send.EmailName + "</td>");
-        Write("<td>" + send.EmailSubject + "</td>");
-        Write("<td>" + send.SendDate + "</td>");
-        Write("<td>" + send.FromName + "</td>");
-        Write("<td>" + send.FromAddress + "</td>");
+        Write("<td>" + (s.ID || "") + "</td>");
+        Write("<td>" + (s.EmailName || "") + "</td>");
+        Write("<td>" + (s.EmailSubject || "") + "</td>");
+        Write("<td>" + (s.SendDate || "") + "</td>");
+        Write("<td>" + (s.FromName || "") + "</td>");
+        Write("<td>" + (s.FromAddress || "") + "</td>");
         Write("</tr>");
       }
 
       Write("</tbody></table>");
 
-      // Pagination
       if (totalPages > 1) {
-        Write("<nav><ul class='pagination'>");
+        Write("<nav><ul class='pagination justify-content-center'>");
         for (var p = 1; p <= totalPages; p++) {
           var active = (p == currentPage) ? " active" : "";
           Write("<li class='page-item" + active + "'><a href='#' class='page-link' data-page='" + p + "'>" + p + "</a></li>");
@@ -66,7 +64,7 @@ try {
       }
 
     } else {
-      Write("<div class='alert alert-warning text-center'>No sends found for this date range.</div>");
+      Write("<div class='alert alert-warning text-center'>No sends found in the selected date range.</div>");
     }
 
     Write("</div>");
