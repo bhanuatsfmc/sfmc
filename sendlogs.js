@@ -29,17 +29,24 @@
     try {
       var proxy = new Script.Util.WSProxy();
       var cols = ["SendID", "EmailName", "SendDate", "Subject"];
-      var filter = {
-        Property: sdate,
-        SimpleOperator: "between",
-        Value: [startDate + "T00:00:00", endDate + "T23:59:59"]
-      };
+
       var options = {
         BatchSize: batchSize,
         Page: currentPage
       };
 
-      var result = proxy.retrieve("DataExtensionObject[" + deName + "]", cols, filter, options);
+     var filter = {
+    Property: sdate,
+    SimpleOperator: "between",
+    Value: [startDate + "T00:00:00", endDate + "T23:59:59"]
+};
+
+var result = proxy.retrieve("DataExtensionRow", ["SendID", "EmailName", "SendDate", "Subject"], {
+    Property: "CustomerKey",
+    SimpleOperator: "equals",
+    Value: deName
+}, filter);
+
 
       if (result && result.Results) {
         sends = result.Results;
