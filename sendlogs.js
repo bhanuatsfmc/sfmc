@@ -15,7 +15,7 @@
   // Configuration
   var batchSize = 10;
   var dateFormat = "yyyy-MM-dd";
-  var startDate = "2025-02-01";
+  var startDate = "2025-02-25";
   var endDate = "2025-03-31";
   var currentPage = 1;
   var sdate = "SendDate";
