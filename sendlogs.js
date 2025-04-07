@@ -20,6 +20,7 @@
   //  var currentPage = Number(Platform.Request.GetFormField("page") || 1);
       var startDate = "2025-03-01";
     var endDate = "2025-03-30";
+var sdaten = "2025-03-01 00:00:00.000";
     var currentPage = 1;
   var sdate = "SendDate";
   var deName = "send_pro";
@@ -36,8 +37,8 @@
             var cols = ["SendID", "EmailName", "SendDate", "Subject"];
             var filter = {
                 Property: sdate,
-                SimpleOperator: "between",
-                Value: [startDate + "T00:00:00", endDate + "T23:59:59"]
+                SimpleOperator: "EQUALS",
+                Value: sdaten
             };
             
             var options = {
