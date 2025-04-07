@@ -91,7 +91,7 @@ try {
     }
 
 } catch (ex) {
-    Write("<p style='color:red;'>Error: " + Stringify(ex) + "</p>");
+   
 }
 </script>
 
