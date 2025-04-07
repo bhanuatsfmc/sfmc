@@ -18,7 +18,7 @@
 
         <!-- Filter Form -->
         <form id="filterForm" class="row g-3 justify-content-center mb-4">
-            <input type="hidden" name="deKey" value="F16FC2FB-F8FD-4137-B97C-6814278847E7" />
+            <input type="hidden" name="deName" value="YourDataExtensionName" />
             <div class="col-auto">
                 <label class="form-label">Start Date</label>
                 <input type="date" class="form-control" name="startDate" required />
@@ -64,54 +64,52 @@
     <!-- SSJS Output -->
     <div style="display:none;">
         <script runat="server">
-        Platform.Load("core", "1");
+        Platform.Load("core", "1.1.1");
 
-        var deKey = Request.GetQueryStringParameter("deKey");
+        var deName = Request.GetQueryStringParameter("deName");
         var startDateStr = Request.GetQueryStringParameter("startDate");
         var endDateStr = Request.GetQueryStringParameter("endDate");
         var currentPage = parseInt(Request.GetQueryStringParameter("page") || "1", 10);
         var pageSize = 10;
 
-        if (startDateStr && endDateStr && deKey) {
+        if (startDateStr && endDateStr && deName) {
             try {
-                var startDate = new Date(startDateStr + "T00:00:00");
-                var endDate = new Date(endDateStr + "T23:59:59");
-
-                var de = DataExtension.Init(deKey);
-                var allRows = de.Rows.Retrieve() || [];
-
-                var filtered = [];
-
-                for (var i = 0; i < allRows.length; i++) {
-                    var row = allRows[i];
-                    var sendDateStr = row["SendDate"];
-                    if (!sendDateStr) continue;
-
-                    try {
-                        var rowDate = new Date(sendDateStr);
-                        if (rowDate >= startDate && rowDate <= endDate) {
-                            filtered.push(row);
-                        }
-                    } catch (errDate) { continue; }
-                }
-
-                var total = filtered.length;
-                var totalPages = Math.ceil(total / pageSize);
-                var startIndex = (currentPage - 1) * pageSize;
-                var pageRows = filtered.slice(startIndex, startIndex + pageSize);
-
+                var proxy = new Script.Util.WSProxy();
+                var cols = ["SendID", "EmailName", "SendDate", "Subject"];
+                
+                // Create date filter
+                var filter = {
+                    Property: "SendDate",
+                    SimpleOperator: "between",
+                    Value: [startDateStr + "T00:00:00", endDateStr + "T23:59:59"]
+                };
+                
+                // Pagination options
+                var options = {
+                    BatchSize: pageSize,
+                    Page: currentPage
+                };
+                
+                // Retrieve data using WSProxy
+                var result = proxy.retrieve("DataExtensionObject[" + deName + "]", cols, filter, options);
+                
                 Write("<div id='ajaxContent'>");
 
-                if (pageRows.length > 0) {
+                if (result && result.Results && result.Results.length > 0) {
+                    var totalCount = result.TotalCount;
+                    var totalPages = Math.ceil(totalCount / pageSize);
+                    var rows = result.Results;
+
                     Write("<table class='table table-bordered table-striped'>");
                     Write("<thead class='table-light'><tr><th>SendID</th><th>Email Name</th><th>Send Date</th><th>Subject</th></tr></thead><tbody>");
-                    for (var j = 0; j < pageRows.length; j++) {
-                        var row = pageRows[j];
+                    
+                    for (var j = 0; j < rows.length; j++) {
+                        var row = rows[j];
                         Write("<tr>");
-                        Write("<td>" + (row["SendID"] || "") + "</td>");
-                        Write("<td>" + (row["EmailName"] || "") + "</td>");
-                        Write("<td>" + (row["SendDate"] || "") + "</td>");
-                        Write("<td>" + (row["Subject"] || "") + "</td>");
+                        Write("<td>" + (row.SendID || "") + "</td>");
+                        Write("<td>" + (row.EmailName || "") + "</td>");
+                        Write("<td>" + (row.SendDate || "") + "</td>");
+                        Write("<td>" + (row.Subject || "") + "</td>");
                         Write("</tr>");
                     }
                     Write("</tbody></table>");
@@ -119,10 +117,23 @@
                     // Pagination UI
                     if (totalPages > 1) {
                         Write("<nav><ul class='pagination justify-content-center'>");
+                        
+                        // Previous button
+                        if (currentPage > 1) {
+                            Write("<li class='page-item'><a href='#' class='page-link' data-page='" + (currentPage-1) + "'>&laquo; Previous</a></li>");
+                        }
+                        
+                        // Page numbers
                         for (var p = 1; p <= totalPages; p++) {
                             var active = (p == currentPage) ? " active" : "";
                             Write("<li class='page-item" + active + "'><a href='#' class='page-link' data-page='" + p + "'>" + p + "</a></li>");
                         }
+                        
+                        // Next button
+                        if (currentPage < totalPages) {
+                            Write("<li class='page-item'><a href='#' class='page-link' data-page='" + (currentPage+1) + "'>Next &raquo;</a></li>");
+                        }
+                        
                         Write("</ul></nav>");
                     }
                 } else {
@@ -132,7 +143,7 @@
                 Write("</div>");
 
             } catch (ex) {
-                Write("<div class='alert alert-danger'>Error: " + Stringify(ex) + "</div>");
+                Write("<div class='alert alert-danger'>Error: " + Stringify(ex.message || ex) + "</div>");
             }
         }
         </script>
