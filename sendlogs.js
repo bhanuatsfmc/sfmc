@@ -15,8 +15,8 @@
   // Configuration
   var batchSize = 50;
   var dateFormat = "yyyy-MM-dd";
-  var startDate = "2025-03-01";
-  var endDate = "2025-03-30";
+  var startDate = "2025-02-01";
+  var endDate = "2025-03-31";
   var currentPage = 1;
   var sdate = "SendDate";
   var deName = "send_pro_Copy"; // 
