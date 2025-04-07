@@ -13,7 +13,7 @@
   Platform.Load("core", "1");
 
   // Configuration
-  var batchSize = 50;
+  var batchSize = 10;
   var dateFormat = "yyyy-MM-dd";
   var startDate = "2025-02-01";
   var endDate = "2025-03-31";
