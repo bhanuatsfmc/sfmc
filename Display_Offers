@@ -92,6 +92,28 @@
         %%[
         /* ----- DATA RETRIEVAL ----- */
         SET @customerId = RequestParameter("customerId")
+		SET @offerId = RequestParameter("offerId")
+        SET @claim = RequestParameter("claim")
+        SET @now = NOW()
+
+        IF @claim == "1" AND NOT EMPTY(@offerId) THEN
+            SET @updateCount = UpdateData(
+                "Offers Table",
+                1,
+                "Offer Id", @offerId,
+                "Customer Id", @customerId,
+                "IsUsed", "true",
+                "UsedDate", Format(@now, "yyyy-MM-dd HH:mm:ss")
+            )
+
+            INSERTDE(
+                "OfferClaimLog",
+                "ClaimId", GUID(),
+                "CustomerId", @customerId,
+                "OfferId", @offerId,
+                "ClaimedAt", Format(@now, "yyyy-MM-dd HH:mm:ss")
+            )
+        ENDIF
 
         /* Check if customerId is provided */
         IF NOT EMPTY(@customerId) THEN
@@ -181,6 +203,11 @@
                         <tr>
                             <td class="offer-name">%%=v(@offerName)=%%</td>
                             <td class="offer-desc">%%=v(@offerDesc)=%%</td>
+							<td><form method="post" action="%%=RequestParameter('PAGEURL')=%%">
+                                <input type="hidden" name="customerId" value="%%=v(@customerId)=%%" />
+                                <input type="hidden" name="offerId" value="%%=v(@offerId)=%%" />
+                                <button type="submit" name="claim" value="1">Claim Offer</button>
+                            </form></td>
                         </tr>
                         %%[ NEXT @i ]%%
                     </tbody>
@@ -209,6 +236,11 @@
                         <tr>
                             <td class="offer-name">%%=v(@offerName)=%%</td>
                             <td class="offer-desc">%%=v(@offerDesc)=%%</td>
+							<td>  <form method="post" action="%%=RequestParameter('PAGEURL')=%%">
+                                <input type="hidden" name="customerId" value="%%=v(@customerId)=%%" />
+                                <input type="hidden" name="offerId" value="%%=v(@offerId)=%%" />
+                                <button type="submit" name="claim" value="1">Claim Offer</button>
+                            </form></td>
                         </tr>
                         %%[ NEXT @j ]%%
                     </tbody>
