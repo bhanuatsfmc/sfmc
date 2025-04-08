@@ -46,7 +46,7 @@
     <div class="card">
         <h3>Past Contracts</h3>
         <table>
-            <tr><th>Contract ID</th><th>Start Date</th><th>Amount</th><th>Status</th></tr>
+            <tr><th>Contract ID</th><th>Start Date</th><th>Expired Date</th><th>Amount</th><th>Status</th></tr>
             %%[ FOR @i = 1 TO RowCount(@past) DO
                 SET @row = Row(@past, @i)
                 SET @contractId = Field(@row, "ContractOrderId")
@@ -58,7 +58,7 @@
             <tr>
                 <td>%%=v(@contractId)=%%</td>
                 <td>%%=v(@contractDate)=%%</td>
-                <td>$%%=v(@ExpiredContract)=%%</td>
+                <td>%%=v(@ExpiredContract)=%%</td>
                 <td>$%%=v(@amount)=%%</td>
                 <td>%%=v(@status)=%%</td>
             </tr>
