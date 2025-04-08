@@ -41,7 +41,7 @@
 
     %%[
         /* Past Contracts */
-        SET @past = LookupOrderedRows("ClientContracts_DE", 10, "ContractStartDate DESC", "AccountId", @accountId)
+        SET @past = LookupOrderedRows("ClientContracts_DE", 10, "ContractStartDate DESC", "AccountId", @accountId,"Status", "Inctive")
     ]%%
     <div class="card">
         <h3>Past Contracts</h3>
@@ -74,6 +74,8 @@
             SET @name = Field(@contact, "FullName")
             SET @email = Field(@contact, "Email")
             SET @mobile = Field(@contact, "Mobile_number")
+SET @status = Field(@contact, "Status")
+SET @role = Field(@contact, "Role")
         ]%%
         <div class="card">
             <h3>Primary Contact Details</h3>
@@ -81,6 +83,8 @@
                 <tr><th>Name</th><td>%%=v(@name)=%%</td></tr>
                 <tr><th>Email</th><td>%%=v(@email)=%%</td></tr>
                 <tr><th>Mobile</th><td>%%=v(@mobile)=%%</td></tr>
+<tr><th>Status</th><td>%%=v(@status)=%%</td></tr>
+<tr><th>Role</th><td>%%=v(@role)=%%</td></tr>
             </table>
         </div>
         %%[ ELSE ]%%
