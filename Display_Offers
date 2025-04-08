@@ -29,7 +29,7 @@
                 /* Redact mobile */
 			IF NOT EMPTY(@mobile) THEN
 			    IF Length(@mobile) >= 4 THEN
-			        SET @redactedMobile = CONCAT("****", Right(@mobile, 4))
+			        SET @redactedMobile = CONCAT("****", @mobile)
 			    ELSE
 			        SET @redactedMobile = "Mobile too short to redact"
 			    ENDIF
