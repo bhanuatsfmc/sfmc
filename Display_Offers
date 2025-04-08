@@ -28,8 +28,8 @@
 
                 /* Redact mobile */
 		IF NOT EMPTY(@mobile) THEN
-		    SET @rights = RIGHT(@mobile, 4)
-		    SET @redactedMobile = CONCAT("****", @rights)
+		    
+		    SET @redactedMobile = CONCAT("****", @mobile)
 		ELSE
 		    SET @redactedMobile = "Mobile not available"
 		ENDIF
