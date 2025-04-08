@@ -56,6 +56,7 @@
         .offer-table td {
             padding: 12px;
             border-bottom: 1px solid #ddd;
+            vertical-align: top;
         }
         .offer-table tr:nth-child(even) {
             background-color: #f2f2f2;
@@ -83,6 +84,27 @@
             padding-bottom: 5px;
             border-bottom: 2px solid #3b82f6;
         }
+        .claim-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        .claim-btn:hover {
+            background-color: #2563eb;
+        }
+        .success-message {
+            color: #10b981;
+            background-color: #ecfdf5;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border-left: 4px solid #10b981;
+        }
     </style>
 </head>
 <body>
@@ -92,27 +114,35 @@
         %%[
         /* ----- DATA RETRIEVAL ----- */
         SET @customerId = RequestParameter("customerId")
-		SET @offerId = RequestParameter("offerId")
+        SET @offerId = RequestParameter("offerId")
         SET @claim = RequestParameter("claim")
         SET @now = NOW()
 
-        IF @claim == "1" AND NOT EMPTY(@offerId) THEN
+        /* ----- OFFER CLAIM PROCESSING ----- */
+        IF @claim == "1" AND NOT EMPTY(@offerId) AND NOT EMPTY(@customerId) THEN
+            /* Update the offer status */
             SET @updateCount = UpdateData(
                 "Offers Table",
                 1,
-                "Offer Id", @offerId,
-                "Customer Id", @customerId,
+                "OfferId", @offerId,
+                "CustomerId", @customerId,
                 "IsUsed", "true",
                 "UsedDate", Format(@now, "yyyy-MM-dd HH:mm:ss")
             )
 
-            INSERTDE(
-                "OfferClaimLog",
-                "ClaimId", GUID(),
-                "CustomerId", @customerId,
-                "OfferId", @offerId,
-                "ClaimedAt", Format(@now, "yyyy-MM-dd HH:mm:ss")
-            )
+            /* Log the claim */
+            IF @updateCount == 1 THEN
+                SET @insertSuccess = InsertData(
+                    "OfferClaimLog",
+                    "ClaimId", GUID(),
+                    "CustomerId", @customerId,
+                    "OfferId", @offerId,
+                    "ClaimedAt", Format(@now, "yyyy-MM-dd HH:mm:ss")
+                )
+                SET @claimSuccess = true
+            ELSE
+                SET @claimSuccess = false
+            ENDIF
         ENDIF
 
         /* Check if customerId is provided */
@@ -177,6 +207,16 @@
         <div class="card">
             <h3>Your Available Offers</h3>
             
+            %%[ IF @claim == "1" AND @claimSuccess THEN ]%%
+                <div class="success-message">
+                    Your offer has been successfully claimed! Thank you for being a valued customer.
+                </div>
+            %%[ ELSEIF @claim == "1" AND NOT @claimSuccess THEN ]%%
+                <div class="error-message">
+                    There was an error processing your claim. Please try again.
+                </div>
+            %%[ ENDIF ]%%
+
             %%[
                 /* Retrieve offers */
                 SET @personalOffers = LookupOrderedRows("Offers Table", 0, "Name ASC", "CustomerId", @customerId, "Active", "true", "IsUsed", "false")
@@ -191,6 +231,7 @@
                         <tr>
                             <th>Offer</th>
                             <th>Details</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -199,15 +240,18 @@
                                 SET @row = Row(@personalOffers, @i)
                                 SET @offerName = Field(@row, "Name")
                                 SET @offerDesc = Field(@row, "Description")
+                                SET @currentOfferId = Field(@row, "OfferId")
                         ]%%
                         <tr>
                             <td class="offer-name">%%=v(@offerName)=%%</td>
                             <td class="offer-desc">%%=v(@offerDesc)=%%</td>
-							<td><form method="post" action="%%=RequestParameter('PAGEURL')=%%">
-                                <input type="hidden" name="customerId" value="%%=v(@customerId)=%%" />
-                                <input type="hidden" name="offerId" value="%%=v(@offerId)=%%" />
-                                <button type="submit" name="claim" value="1">Claim Offer</button>
-                            </form></td>
+                            <td>
+                                <form method="post" action="%%=RequestParameter('PAGEURL')=%%">
+                                    <input type="hidden" name="customerId" value="%%=v(@customerId)=%%">
+                                    <input type="hidden" name="offerId" value="%%=v(@currentOfferId)=%%">
+                                    <button type="submit" name="claim" value="1" class="claim-btn">Claim Offer</button>
+                                </form>
+                            </td>
                         </tr>
                         %%[ NEXT @i ]%%
                     </tbody>
@@ -224,6 +268,7 @@
                         <tr>
                             <th>Offer</th>
                             <th>Details</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -232,15 +277,18 @@
                                 SET @row = Row(@genericOffers, @j)
                                 SET @offerName = Field(@row, "Name")
                                 SET @offerDesc = Field(@row, "Description")
+                                SET @currentOfferId = Field(@row, "OfferId")
                         ]%%
                         <tr>
                             <td class="offer-name">%%=v(@offerName)=%%</td>
                             <td class="offer-desc">%%=v(@offerDesc)=%%</td>
-							<td>  <form method="post" action="%%=RequestParameter('PAGEURL')=%%">
-                                <input type="hidden" name="customerId" value="%%=v(@customerId)=%%" />
-                                <input type="hidden" name="offerId" value="%%=v(@offerId)=%%" />
-                                <button type="submit" name="claim" value="1">Claim Offer</button>
-                            </form></td>
+                            <td>
+                                <form method="post" action="%%=RequestParameter('PAGEURL')=%%">
+                                    <input type="hidden" name="customerId" value="%%=v(@customerId)=%%">
+                                    <input type="hidden" name="offerId" value="%%=v(@currentOfferId)=%%">
+                                    <button type="submit" name="claim" value="1" class="claim-btn">Claim Offer</button>
+                                </form>
+                            </td>
                         </tr>
                         %%[ NEXT @j ]%%
                     </tbody>
