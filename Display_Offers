@@ -3,65 +3,112 @@
     <meta charset="UTF-8">
     <title>Your Loyalty Rewards</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
-        .card { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h2 { margin-top: 0; }
-        .offer { background: #eef4ff; padding: 10px; margin: 10px 0; border-left: 4px solid #3b82f6; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f9f9f9;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        h3 {
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+        .info-row {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        strong {
+            display: inline-block;
+            width: 80px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
-    <h2>Your Loyalty Rewards</h2>
+    <div class="container">
+        <h2>Your Loyalty Rewards</h2>
 
-    %%[
+        %%[
+        /* ----- DATA RETRIEVAL ----- */
         SET @customerId = RequestParameter("customerId")
 
-        /* Check if customerId is not empty */
+        /* Check if customerId is provided */
         IF NOT EMPTY(@customerId) THEN
-            /* Get contact info */
+            /* Get contact info from data extension */
             SET @contactRows = LookupRows("Contact Info", "ContactId", @customerId)
+            
             IF RowCount(@contactRows) > 0 THEN
                 SET @contact = Row(@contactRows, 1)
                 SET @name = Field(@contact, "FullName")
                 SET @email = Field(@contact, "Email")
                 SET @mobile = Field(@contact, "Mobile_Number")
 
-    IF NOT EMPTY(@email) AND IndexOf(@email, "@") > 0 THEN
+                /* ----- EMAIL REDACTION ----- */
+                IF NOT EMPTY(@email) AND IndexOf(@email, "@") > 0 THEN
+                    /* Split email into local part and domain */
+                    SET @atPos = IndexOf(@email, "@")
+                    SET @localPart = Substring(@email, 1, Subtract(@atPos, 1))
+                    SET @domain = Substring(@email, Add(@atPos, 1), Length(@email))
 
-    /* Split email into local part and domain */
-    SET @atPos = IndexOf(@email, "@")
-    SET @localPart = Substring(@email, 1, Subtract(@atPos, 1))
-    SET @domain = Substring(@email, Add(@atPos, 1), Length(@email))
+                    /* Get first 2 chars of local part */
+                    SET @localStart = Substring(@localPart, 1, 2)
+                    
+                    /* Get last 2 chars of domain */
+                    SET @domainEnd = Substring(@domain, Subtract(Length(@domain), 1), 2)
+                    
+                    /* Create redacted email */
+                    SET @redactedEmail = Concat(@localStart, "****@****", @domainEnd)
+                ELSE
+                    /* Handle invalid email format */
+                    SET @redactedEmail = "****@****"
+                ENDIF
 
-    /* Get first 2 chars of local part */
-    SET @localStart = Substring(@localPart, 1, 2)
-    
-    /* Get last 2 chars of domain */
-    SET @domainEnd = Substring(@domain, Subtract(Length(@domain), 1), 2)
-    
-    /* Create redacted email */
-    SET @redactedEmail = Concat(@localStart, "****@****", @domainEnd)
-
-ELSE
-    /* Handle invalid email format */
-    SET @redactedEmail = "****@****"
-ENDIF
-
-                /* Redact mobile */
+                /* ----- MOBILE REDACTION ----- */
                 IF NOT EMPTY(@mobile) THEN
-                    SET @redactedMobile =  Concat("****", Substring(@mobile, Subtract(Length(@mobile), 3), 4))
+                    SET @redactedMobile = Concat("****", Substring(@mobile, Subtract(Length(@mobile), 3), 4))
                 ELSE
                     SET @redactedMobile = "Mobile not available"
                 ENDIF
-			ENDIF
-		ENDIF
- ]%%
-                <div class="card">
-                    <h3>Customer Info</h3>
-                    <p><strong>Name:</strong> %%=v(@name)=%%</p>
-             <p><strong>Email:</strong> %%=v(@redactedEmail)=%%</p>
-                    <p><strong>Mobile:</strong> %%=v(@redactedMobile)=%%</p>
-                </div>
+            ENDIF
+        ENDIF
+        ]%%
 
-   
+        <!-- Customer Information Card -->
+        <div class="card">
+            <h3>Customer Info</h3>
+            
+            <div class="info-row">
+                <strong>Name:</strong> %%=v(@name)=%%
+            </div>
+            
+            <div class="info-row">
+                <strong>Email:</strong> %%=v(@redactedEmail)=%%
+            </div>
+            
+            <div class="info-row">
+                <strong>Mobile:</strong> %%=v(@redactedMobile)=%%
+            </div>
+        </div>
+    </div>
 </body>
 </html>
