@@ -44,7 +44,7 @@
                     <h3>Customer Info</h3>
                     <p><strong>Name:</strong> %%=v(@name)=%%</p>
                     <p><strong>Email:</strong> %%=v(@email)=%%</p>
-                    <p><strong>Mobile:</strong> %%=v(@mobile)=%%</p>
+                    <p><strong>Mobile:</strong> %%=v(@@redactedMobile)=%%</p>
                 </div>
 
    
