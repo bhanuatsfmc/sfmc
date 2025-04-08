@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Contract Overview</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f3f3f3; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2, h3 { margin-top: 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h2>Account Contract Overview</h2>
+
+    %%[
+        SET @accountId = RequestParameter("accountId")
+
+        /* Current Contract */
+        SET @current = LookupOrderedRows("ClientContracts_DE", 1, "ContractStartDate DESC", "AccountId", @accountId, "Status", "Active")
+        IF RowCount(@current) > 0 THEN
+            SET @row = Row(@current, 1)
+            SET @contractId = Field(@row, "ContractOrderId")
+            SET @contractDate = Field(@row, "ContractStartDate")
+            SET @amount = Field(@row, "Amount")
+            SET @status = Field(@row, "Status")
+        ]%%
+        <div class="card">
+            <h3>Current Active Contract</h3>
+            <table>
+                <tr><th>Contract ID</th><td>%%=v(@contractId)=%%</td></tr>
+                <tr><th>Start Date</th><td>%%=v(@contractDate)=%%</td></tr>
+                <tr><th>Amount</th><td>$%%=v(@amount)=%%</td></tr>
+                <tr><th>Status</th><td>%%=v(@status)=%%</td></tr>
+            </table>
+        </div>
+        %%[ ELSE ]%%
+        <div class="card"><p>No active contract found.</p></div>
+        %%[ ENDIF ]%%
+
+    %%[
+        /* Past Contracts */
+        SET @past = LookupOrderedRows("ClientContracts_DE", 10, "ContractStartDate DESC", "AccountId", @accountId)
+    ]%%
+    <div class="card">
+        <h3>Past Contracts</h3>
+        <table>
+            <tr><th>Contract ID</th><th>Start Date</th><th>Amount</th><th>Status</th></tr>
+            %%[ FOR @i = 1 TO RowCount(@past) DO
+                SET @row = Row(@past, @i)
+                SET @contractId = Field(@row, "ContractOrderId")
+                SET @contractDate = Field(@row, "ContractStartDate")
+                SET @amount = Field(@row, "Amount")
+                SET @status = Field(@row, "Status")
+            ]%%
+            <tr>
+                <td>%%=v(@contractId)=%%</td>
+                <td>%%=v(@contractDate)=%%</td>
+                <td>$%%=v(@amount)=%%</td>
+                <td>%%=v(@status)=%%</td>
+            </tr>
+            %%[ NEXT @i ]%%
+        </table>
+    </div>
+
+    %%[
+        /* Primary Contact Info */
+        SET @contactRow = LookupRows("Contact Info", "AccountId", @accountId, "Role", "Primary")
+        IF RowCount(@contactRow) > 0 THEN
+            SET @contact = Row(@contactRow, 1)
+            SET @name = Field(@contact, "FullName")
+            SET @email = Field(@contact, "Email")
+            SET @mobile = Field(@contact, "Mobile_number")
+        ]%%
+        <div class="card">
+            <h3>Primary Contact Details</h3>
+            <table>
+                <tr><th>Name</th><td>%%=v(@name)=%%</td></tr>
+                <tr><th>Email</th><td>%%=v(@email)=%%</td></tr>
+                <tr><th>Mobile</th><td>%%=v(@mobile)=%%</td></tr>
+            </table>
+        </div>
+        %%[ ELSE ]%%
+        <div class="card"><p>No primary contact found.</p></div>
+        %%[ ENDIF ]%%
+</body>
+</html>
