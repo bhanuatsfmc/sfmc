@@ -51,12 +51,14 @@
                 SET @row = Row(@past, @i)
                 SET @contractId = Field(@row, "ContractOrderId")
                 SET @contractDate = Field(@row, "ContractStartDate")
+                SET @ExpiredContract = Field(@row, "ExpiryDate")
                 SET @amount = Field(@row, "Amount")
                 SET @status = Field(@row, "Status")
             ]%%
             <tr>
                 <td>%%=v(@contractId)=%%</td>
                 <td>%%=v(@contractDate)=%%</td>
+                <td>$%%=v(@ExpiredContract)=%%</td>
                 <td>$%%=v(@amount)=%%</td>
                 <td>%%=v(@status)=%%</td>
             </tr>
