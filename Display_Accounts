@@ -41,7 +41,7 @@
 
     %%[
         /* Past Contracts */, 
-        SET @past = LookupOrderedRows("ClientContracts_DE", 10, "ContractStartDate DESC", "AccountId", @accountId, "Status", "Inactive")
+        SET @past = LookupOrderedRows("ClientContracts_DE", 50, "ContractStartDate DESC", "AccountId", @accountId, "Status", "Inactive")
     ]%%
     <div class="card">
         <h3>Past Contracts</h3>
