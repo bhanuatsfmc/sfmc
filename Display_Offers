@@ -29,7 +29,7 @@
 
                 /* Redact mobile */
                 IF NOT EMPTY(@mobile) THEN
-                    SET @redactedMobile = CONCAT("****",Substring(@mobile, Subtract(Length(@mobile), 4) + 1, 4))
+                    SET @redactedMobile =  Concat("****", Substring(@mobile, Subtract(Length(@mobile), 3), 4))
                 ELSE
                     SET @redactedMobile = "Mobile not available"
                 ENDIF
