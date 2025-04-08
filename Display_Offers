@@ -41,6 +41,8 @@
                 ELSE
                     SET @redactedMobile = "Mobile not available"
                 ENDIF
+				ENDIF
+				ENDIF
  ]%%
                 <div class="card">
                     <h3>Customer Info</h3>
@@ -49,8 +51,6 @@
                     <p><strong>Mobile:</strong> %%=v(@redactedMobile)=%%</p>
                 </div>
 
-         %%[ ENDIF ]%%        
-        %%[ ENDIF ]%%
    
 </body>
 </html>
