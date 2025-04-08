@@ -41,7 +41,7 @@
                 ELSE
                     SET @redactedMobile = "Mobile not available"
                 ENDIF
-
+ ]%%
                 <div class="card">
                     <h3>Customer Info</h3>
                     <p><strong>Name:</strong> %%=v(@name)=%%</p>
@@ -49,59 +49,8 @@
                     <p><strong>Mobile:</strong> %%=v(@redactedMobile)=%%</p>
                 </div>
 
-                <div class="card">
-                    <h3>Your Available Offers</h3>
-                    %%[
-                        SET @personalOffers = LookupOrderedRows("Offers Table", 0, "Name ASC", "CustomerId", @customerId, "Active", "true", "IsUsed", "false")
-                        SET @genericOffers = LookupOrderedRows("Offers Table", 0, "Name ASC", "Offerlevel", "Generic", "Active", "true", "IsUsed", "false")
-
-                        IF RowCount(@personalOffers) > 0 THEN
-                            FOR @i = 1 TO RowCount(@personalOffers) DO
-                                SET @row = Row(@personalOffers, @i)
-                                SET @offerName = Field(@row, "Name")
-                                SET @offerDesc = Field(@row, "Description")
-                    ]%%
-                                <div class="offer">
-                                    <strong>%%=v(@offerName)=%%</strong><br>
-                                    %%=v(@offerDesc)=%%
-                                </div>
-                    %%[
-                            NEXT @i
-                        ENDIF
-
-                        IF RowCount(@genericOffers) > 0 THEN
-                            FOR @j = 1 TO RowCount(@genericOffers) DO
-                                SET @row = Row(@genericOffers, @j)
-                                SET @offerName = Field(@row, "Name")
-                                SET @offerDesc = Field(@row, "Description")
-                    ]%%
-                                <div class="offer">
-                                    <strong>%%=v(@offerName)=%%</strong><br>
-                                    %%=v(@offerDesc)=%%
-                                </div>
-                    %%[
-                            NEXT @j
-                        ENDIF
-
-                        IF RowCount(@personalOffers) == 0 AND RowCount(@genericOffers) == 0 THEN
-                    ]%%
-                        <p>No active offers available at the moment.</p>
-                    %%[
-                        ENDIF
-                    ]%%
-                </div>
-            ELSE
-            ]%%
-                <div class="card">
-                    <p>No customer found for the provided ID.</p>
-                </div>
-            %%[ ENDIF ]%%
-        ELSE
-        ]%%
-            <div class="card">
-                <p>Customer ID is required.</p>
-            </div>
+         %%[ ENDIF ]%%        
         %%[ ENDIF ]%%
-    ]%%
+   
 </body>
 </html>
