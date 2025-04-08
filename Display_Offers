@@ -25,7 +25,26 @@
                 SET @email = Field(@contact, "Email")
                 SET @mobile = Field(@contact, "Mobile_Number")
 
+    IF NOT EMPTY(@email) AND IndexOf(@email, "@") > 0 THEN
+
+    /* Split email into local part and domain */
+    SET @atPos = IndexOf(@email, "@")
+    SET @localPart = Substring(@email, 1, Subtract(@atPos, 1))
+    SET @domain = Substring(@email, Add(@atPos, 1), Length(@email))
+
+    /* Get first 2 chars of local part */
+    SET @localStart = Substring(@localPart, 1, 2)
     
+    /* Get last 2 chars of domain */
+    SET @domainEnd = Substring(@domain, Subtract(Length(@domain), 1), 2)
+    
+    /* Create redacted email */
+    SET @redactedEmail = Concat(@localStart, "****@****", @domainEnd)
+
+ELSE
+    /* Handle invalid email format */
+    SET @redactedEmail = "****@****"
+ENDIF
 
                 /* Redact mobile */
                 IF NOT EMPTY(@mobile) THEN
@@ -39,7 +58,7 @@
                 <div class="card">
                     <h3>Customer Info</h3>
                     <p><strong>Name:</strong> %%=v(@name)=%%</p>
-             
+             <p><strong>Email:</strong> %%=v(@redactedEmail)=%%</p>
                     <p><strong>Mobile:</strong> %%=v(@redactedMobile)=%%</p>
                 </div>
 
