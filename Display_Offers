@@ -25,14 +25,12 @@
                 SET @email = Field(@contact, "Email")
                 SET @mobile = Field(@contact, "Mobile_Number")
 
-       /* Redact email */
-                IF NOT EMPTY(@email) THEN
-                    SET @emailParts = BuildRowsetFromString(@email, "@")
-                    SET @emailLocal = Field(Row(@emailParts, 1), 1)
-                    SET @emailDomain = Field(Row(@emailParts, 2), 1)
-                    SET @redactedEmail = CONCAT(Left(@emailLocal, 2), REPEAT("*", Length(@emailLocal)-2), "@", REPEAT("*", Length(@emailDomain)-2), Right(@emailDomain, 2))
+
+                /* Redact mobile */
+                IF NOT EMPTY(@mobile) THEN
+                    SET @redactedMobile = CONCAT("****", Right(@mobile, 4))
                 ELSE
-                    SET @redactedEmail = "Email not available"
+                    SET @redactedMobile = "Mobile not available"
                 ENDIF
 
 
