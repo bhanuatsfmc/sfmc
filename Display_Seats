@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seat Availability API</title>
+  <script>
+    // Example JS to fetch availability
+    async function fetchAvailability(eventId, elementId) {
+      try {
+        const res = await fetch(`https://cloud.email.universalgeneve.com/Gitcode4?eventId=${eventId}`);
+        const data = await res.json();
+        document.getElementById(elementId).innerText = `Available Seats: ${data.availableSeats}`;
+      } catch (err) {
+        console.error(err);
+        document.getElementById(elementId).innerText = "Unable to load availability.";
+      }
+    }
+
+    // Load availability on page load for demo event
+    window.onload = function () {
+      fetchAvailability("EVT123", "seat-count-EVT123");
+    };
+  </script>
+</head>
+<body>
+  <h2>Event: Rock Festival 2025</h2>
+  <div id="seat-count-EVT123">Loading availability...</div>
+
+  %%[
+    VAR @eventId, @availableSeats, @eventRow
+    SET @eventId = RequestParameter("eventId")
+    SET @availableSeats = "Unavailable"
+    IF NOT EMPTY(@eventId) THEN
+      SET @eventRow = LookupRows("Ticket Availability Info", "EventId", @eventId)
+      IF RowCount(@eventRow) > 0 THEN
+        SET @availableSeats = Field(Row(@eventRow, 1), "Tickets_Available")
+      ENDIF
+    ENDIF
+  ]%%
+
+  <script runat="server">
+    Platform.Response.SetResponseHeader("Content-Type", "application/json");
+  </script>
+  %%[ IF NOT EMPTY(@eventId) THEN ]%%
+  {
+    "eventId": "%%=v(@eventId)=%%",
+    "availableSeats": "%%=v(@availableSeats)=%%"
+  }
+  %%[ ENDIF ]%%
+</body>
+</html>
