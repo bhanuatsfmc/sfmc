@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="mb-4 text-center">Filter Data Extension Records</h2>
+        <h2 class="mb-4 text-center">SSJS Technical Test Scenario</h2>
 
         <!-- Filter Form -->
         <form id="filterForm" class="row g-3 justify-content-center mb-4">
