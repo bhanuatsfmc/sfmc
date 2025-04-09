@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Send Object Filter UI</title>
+    <title>DE Filter UI</title>
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -14,10 +14,11 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="mb-4 text-center">Filter Send Object Records</h2>
+        <h2 class="mb-4 text-center">Filter Data Extension Records</h2>
 
         <!-- Filter Form -->
         <form id="filterForm" class="row g-3 justify-content-center mb-4">
+            <input type="hidden" name="deKey" value="F16FC2FB-F8FD-4137-B97C-6814278847E7" />
             <div class="col-auto">
                 <label class="form-label">Start Date</label>
                 <input type="date" class="form-control" name="startDate" required />
@@ -65,105 +66,73 @@
         <script runat="server">
         Platform.Load("core", "1");
 
+        var deKey = Request.GetQueryStringParameter("deKey");
         var startDateStr = Request.GetQueryStringParameter("startDate");
         var endDateStr = Request.GetQueryStringParameter("endDate");
         var currentPage = parseInt(Request.GetQueryStringParameter("page") || "1", 10);
         var pageSize = 10;
 
-        if (startDateStr && endDateStr) {
+        if (startDateStr && endDateStr && deKey) {
             try {
-                var startDate = startDateStr + "T00:00:00";
-                var endDate = endDateStr + "T23:59:59";
+                var startDate = new Date(startDateStr + "T00:00:00");
+                var endDate = new Date(endDateStr + "T23:59:59");
 
-                // Create WSProxy instance
-                var ws = new Script.Util.WSProxy();
-                
-                // Define properties to retrieve from Send object
-                var props = ["ID", "Name", "SendDate", "Subject"];
-                
-                // Create date range filter
-                var filter = {
-                    Property: "SendDate",
-                    SimpleOperator: "between",
-                    Value: [startDate, endDate]
-                };
-                
-                // Set batch size for retrieval
-                var options = {
-                    BatchSize: 2500
-                };
+                var de = DataExtension.Init(deKey);
+                var allRows = de.Rows.Retrieve() || [];
 
-                // Retrieve Send objects
-                var retrieved = ws.retrieve("Send", props, filter, options);
-                var allResults = retrieved.Results || [];
-                var totalRecords = allResults.length;
+                var filtered = [];
 
-                // Calculate pagination values
-                var totalPages = Math.ceil(totalRecords / pageSize);
-                currentPage = Math.max(1, Math.min(currentPage, totalPages)); // Ensure page is within bounds
+                for (var i = 0; i < allRows.length; i++) {
+                    var row = allRows[i];
+                    var sendDateStr = row["SendDate"];
+                    if (!sendDateStr) continue;
+
+                    try {
+                        var rowDate = new Date(sendDateStr);
+                        if (rowDate >= startDate && rowDate <= endDate) {
+                            filtered.push(row);
+                        }
+                    } catch (errDate) { continue; }
+                }
+
+                var total = filtered.length;
+                var totalPages = Math.ceil(total / pageSize);
                 var startIndex = (currentPage - 1) * pageSize;
-                var pagedResults = allResults.slice(startIndex, startIndex + pageSize);
+                var pageRows = filtered.slice(startIndex, startIndex + pageSize);
 
                 Write("<div id='ajaxContent'>");
 
-                if (pagedResults.length > 0) {
+                if (pageRows.length > 0) {
                     Write("<table class='table table-bordered table-striped'>");
-                    Write("<thead class='table-light'><tr><th>Send ID</th><th>Email Name</th><th>Send Date</th><th>Subject</th></tr></thead><tbody>");
-                    
-                    // Output each row of data
-                    for (var i = 0; i < pagedResults.length; i++) {
-                        var row = pagedResults[i];
+                    Write("<thead class='table-light'><tr><th>SendID</th><th>Email Name</th><th>Send Date</th><th>Subject</th></tr></thead><tbody>");
+                    for (var j = 0; j < pageRows.length; j++) {
+                        var row = pageRows[j];
                         Write("<tr>");
-                        Write("<td>" + Stringify(row.ID) + "</td>");
-                        Write("<td>" + Stringify(row.Name) + "</td>");
-                        Write("<td>" + FormatDate(row.SendDate) + "</td>");
-                        Write("<td>" + Stringify(row.Subject) + "</td>");
+                        Write("<td>" + (row["SendID"] || "") + "</td>");
+                        Write("<td>" + (row["EmailName"] || "") + "</td>");
+                        Write("<td>" + (row["SendDate"] || "") + "</td>");
+                        Write("<td>" + (row["Subject"] || "") + "</td>");
                         Write("</tr>");
                     }
-                    
                     Write("</tbody></table>");
 
                     // Pagination UI
                     if (totalPages > 1) {
                         Write("<nav><ul class='pagination justify-content-center'>");
-                        
-                        // Previous page link
-                        if (currentPage > 1) {
-                            Write("<li class='page-item'><a class='page-link' href='#' data-page='" + (currentPage - 1) + "'>&laquo;</a></li>");
-                        }
-                        
-                        // Page number links
                         for (var p = 1; p <= totalPages; p++) {
                             var active = (p == currentPage) ? " active" : "";
-                            Write("<li class='page-item" + active + "'><a class='page-link' href='#' data-page='" + p + "'>" + p + "</a></li>");
+                            Write("<li class='page-item" + active + "'><a href='#' class='page-link' data-page='" + p + "'>" + p + "</a></li>");
                         }
-                        
-                        // Next page link
-                        if (currentPage < totalPages) {
-                            Write("<li class='page-item'><a class='page-link' href='#' data-page='" + (currentPage + 1) + "'>&raquo;</a></li>");
-                        }
-                        
                         Write("</ul></nav>");
                     }
                 } else {
-                    Write("<div class='alert alert-warning text-center'>No Send records found in the selected date range.</div>");
+                    Write("<div class='alert alert-warning text-center'>No records found in the selected date range.</div>");
                 }
 
                 Write("</div>");
 
             } catch (ex) {
                 Write("<div class='alert alert-danger'>Error: " + Stringify(ex) + "</div>");
-            }
-        }
-
-        // Helper function to format dates for display
-        function FormatDate(dateStr) {
-            if (!dateStr) return "";
-            try {
-                var date = new Date(dateStr);
-                return date.toLocaleDateString() + " " + date.toLocaleTimeString();
-            } catch (e) {
-                return dateStr;
             }
         }
         </script>
