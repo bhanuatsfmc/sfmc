@@ -2,28 +2,296 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seat Availability API</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Seat Availability</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --success: #4cc9f0;
+      --warning: #f8961e;
+      --danger: #f94144;
+      --dark: #212529;
+      --light: #f8f9fa;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f5f7fa;
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 20px 0;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .header p {
+      font-size: 1.1rem;
+      color: #6c757d;
+    }
+    
+    .event-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+    
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .event-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    
+    .event-details {
+      padding: 25px;
+    }
+    
+    .event-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .meta-item i {
+      color: var(--primary);
+    }
+    
+    .availability-section {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    
+    .availability-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .seats-available {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 10px;
+    }
+    
+    .seats-unavailable {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--danger);
+      margin-bottom: 10px;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .status-available {
+      background-color: rgba(76, 201, 240, 0.1);
+      color: var(--success);
+    }
+    
+    .status-soldout {
+      background-color: rgba(249, 65, 68, 0.1);
+      color: var(--danger);
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .cta-button:hover {
+      background-color: #3a56d4;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+    
+    .cta-button:disabled {
+      background-color: #adb5bd;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(67, 97, 238, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .event-title {
+        font-size: 1.5rem;
+      }
+      
+      .seats-available, .seats-unavailable {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h2>Event: Rock Festival 2025</h2>
-
-
-  %%[
-    VAR @eventId, @availableSeats, @eventRow
-    SET @eventId = RequestParameter("eventId")
-    SET @availableSeats = "Unavailable"
-    IF NOT EMPTY(@eventId) THEN
-      SET @eventRow = LookupRows("Ticket Availability Info", "EventId", @eventId)
-      IF RowCount(@eventRow) > 0 THEN
-        SET @availableSeats = Field(Row(@eventRow, 1), "Tickets_Available")
+  <div class="container">
+    <div class="header">
+      <h1>Rock Festival 2025</h1>
+      <p>Check seat availability for the biggest music event of the year</p>
+    </div>
+    
+    %%[
+      VAR @eventId, @availableSeats, @eventRow, @eventName, @eventDate, @eventLocation, @eventImage
+      SET @eventId = RequestParameter("eventId")
+      SET @availableSeats = "0"
+      SET @eventName = "Rock Festival 2025"
+      SET @eventDate = "June 12-14, 2025"
+      SET @eventLocation = "Central Park, New York"
+      SET @eventImage = "https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+      
+      IF NOT EMPTY(@eventId) THEN
+        SET @eventRow = LookupRows("Ticket Availability Info", "EventId", @eventId)
+        IF RowCount(@eventRow) > 0 THEN
+          SET @availableSeats = Field(Row(@eventRow, 1), "Tickets_Available")
+        ENDIF
       ENDIF
-    ENDIF
-  ]%%
-
-
-    "eventId": "%%=v(@eventId)=%%",
-    "availableSeats": "%%=v(@availableSeats)=%%"
-
+      
+      /* Determine status text and class */
+      SET @statusText = "Available"
+      SET @statusClass = "status-available"
+      SET @seatsClass = "seats-available"
+      
+      IF @availableSeats == "0" THEN
+        SET @statusText = "Sold Out"
+        SET @statusClass = "status-soldout"
+        SET @seatsClass = "seats-unavailable"
+      ENDIF
+    ]%%
+    
+    <div class="event-card">
+      <img src="%%=v(@eventImage)=%%" alt="%%=v(@eventName)=%%" class="event-image">
+      <div class="event-details">
+        <h2 class="event-title">%%=v(@eventName)=%%</h2>
+        
+        <div class="event-meta">
+          <div class="meta-item">
+            <i>📅</i>
+            <span>%%=v(@eventDate)=%%</span>
+          </div>
+          <div class="meta-item">
+            <i>📍</i>
+            <span>%%=v(@eventLocation)=%%</span>
+          </div>
+          <div class="meta-item">
+            <i>🎟️</i>
+            <span>Event ID: %%=v(@eventId)=%%</span>
+          </div>
+        </div>
+        
+        <div class="availability-section">
+          <h3 class="availability-title">
+            Seat Availability 
+            <span class="status-badge %%=v(@statusClass)=%%">%%=v(@statusText)=%%</span>
+          </h3>
+          
+          <div class="%%=v(@seatsClass)=%%">
+            %%=v(@availableSeats)=%% seats available
+          </div>
+          
+          <p>%%[ IF @availableSeats != "0" THEN ]%% 
+            Hurry up! Only a limited number of tickets remain for this event.
+            %%[ ELSE ]%%
+            This event is completely sold out. Check back for last-minute cancellations.
+            %%[ ENDIF ]%%
+          </p>
+          
+          <button class="cta-button" %%=IIF(@availableSeats == "0", "disabled", "")=%%>
+            %%[ IF @availableSeats != "0" THEN ]%% 
+              Book Now
+            %%[ ELSE ]%%
+              Sold Out
+            %%[ ENDIF ]%%
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
