@@ -1,633 +1,345 @@
-<!DOCTYPE html>
-<html>
+
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
-    <link rel="stylesheet" type="text/css" href="https://www.smith-nephew.com/assets/head/?v=lCtdyL9hWcNhgOrwD6wZ5SkrHpECjEkDkcl0QP06bh81">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.smith-nephew.com/assets/head/?v=lCtdyL9hWcNhgOrwD6wZ5SkrHpECjEkDkcl0QP06bh81">
     <link rel="icon" href = "https://image.digital.smith-nephew.com/lib/fe3211737364047e751177/m/1/48107551-6b7e-419f-9ad3-2676a4239229.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://cloud.digital.smith-nephew.com/datalayer" type="text/javascript"></script>
-     <style>
-    .sn_form_question_wrapper {
-      display: flex;
-      margin-bottom: 5px;
-      }
-   .consent-revealer--cta label {
-      width: 100%;
-      }
-       #GIT_field_group{
-         display:none;
-       }
-       .checkbox-group {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 600px;
-        user-select: none;
-        margin-bottom: 10px;
-      }
-      .checkbox-group>* {
-        margin: 0.5rem 0.5rem;
-      }
-      .checkbox-group-legend,
-      .form fieldset legend {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #404043;
-        line-height: 1.125rem;
-        margin-bottom: 0.75rem;
-        font-family: "SNEmericWeb_SemiBold";
-        width: 100%;
-      }
-      .checkbox-group-legend {
-        text-align: center;
-      }
-       .checkbox-input {
-        clip: rect(0 0 0 0);
-        clip-path: inset(100%);
-        height: 1px;
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
-      }
-      .checkbox-input:checked+.checkbox-tile {
-        border-color: #ff9d18;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        color: #ff9d18;
-      }
-      .checkbox-input:focus+.checkbox-tile {
-        border-color: #ff9d18;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #f8e0bd;
-      }
-      .checkbox-tile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 15rem;
-        min-height: 5rem;
-        border-radius: 0.5rem;
-        border: 2px solid #717275;
-        background-color: #fff;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        transition: 0.15s ease;
-        cursor: pointer;
-        position: relative;
-        padding: 0px 5px;
-      }
-      .checkbox-tile:before {
-        content: "";
-        position: absolute;
-        display: block;
-        width: 1rem;
-        height: 1rem;
-        border: 2px solid #f8c988;
-        background-color: #fff;
-        border-radius: 50%;
-        top: 0.25rem;
-        left: 0.25rem;
-        opacity: 0;
-        transform: scale(0);
-        transition: 0.25s ease;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23FFFFFF' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Cpolyline points='216 72.005 104 184 48 128.005' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'%3E%3C/polyline%3E%3C/svg%3E");
-        background-size: 12px;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-      }
-      .checkbox-input:checked+.checkbox-tile:before {
-        transform: scale(1);
-        opacity: 1;
-        background-color: #ff9d18;
-        border-color: #ff9d18;
-      }
-      .checkbox-tile:hover {
-        border-color: #ff9d18;
-      }
-      .checkbox-tile:hover:before {
-        transform: scale(1);
-        opacity: 1;
-      }
-      .checkbox-icon {
-        transition: 0.375s ease;
-        color: #494949;
-      }
-      .checkbox-icon svg {
-        width: 3rem;
-        height: 3rem;
-      }
-      .checkbox-label {
-        color: #404043;
-        transition: 0.375s ease;
-        text-align: center;
-        font-family: "SNEmericWeb_SemiBold";
-      }
-      .checkbox-label.description {
-        font-size: 0.75rem;
-        font-family: 'SNEmericWeb_Book';
-        padding-top: 8px;
-      }
-   </style>
-   
-      <div data-type="slot" data-key="amp" data-allowed-blocks="codesnippetblock" data-label="Add AMPscript here"></div>
-    
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <title>Imperial Sports Knee Meeting lead form</title>
     <script runat="server">
-  Platform.Load("Core","1.1.1");
-  try{
-</script>
-  <!--
+    Platform.Load("Core","1.1.1");
+    try{
+    </script>
+    <!--
 %%[
+/*
+Don't forget to chagne:
+1. <title></title> in HTML;
+2. campaign id, campaign status, DE name, consent source in AMPscript;
+3. if tracking is needed add correct value to DL_formname input in HTML
+ */
+ 
 /* --- ON PAGE LOAD --- */
+set @param = QueryParameter("embedded")
 set @MID = AuthenticatedMemberID()
-SET @RecordTypeId = "0124P000000OSkwQAG"
 IF @MID == "536003181" THEN
-   /*TEST BU*/
-   
-   SET @journeyDefKey = "APIEvent-b9ebb4e4-377b-4d3c-d29a-6337668be75a"
-   SET @clientid = "dmhkvga4japrzyukhrdc7uad"
-   SET @clientSecret = "AfrpPd023zmuWGinvHUusut9"
-   SET @authURI = "https://mcyy-6cm08srlbw8b5cqf86346m1.auth.marketingcloudapis.com/"
-   SET @restURI = "https://mcyy-6cm08srlbw8b5cqf86346m1.rest.marketingcloudapis.com/"
-ELSEIF @MID == "536003183" THEN
-   /*Central EU BU*/
-   SET @journeyDefKey = "APIEvent-41378b75-2393-1652-6268-5c128ac8befc"
-   SET @clientid = "9kpduelrgqgpkw8qx7rdxc5s"
-   SET @clientSecret = "qCLgQj7OKLU2MHfMCduRACWc"
-   SET @authURI = "https://mcyy-6cm08srlbw8b5cqf86346m1.auth.marketingcloudapis.com/"
-   SET @restURI = "https://mcyy-6cm08srlbw8b5cqf86346m1.rest.marketingcloudapis.com/"
-ELSEIF @MID == "536003057" THEN
-  /* Global BU */
-   SET @journeyDefKey = "APIEvent-a1f7ab0c-520c-f863-433a-949b1825445d"
-   SET @clientid = "nos89tspp30h2y1x633ld3l0"
-   SET @clientSecret = "qDPdyeD8XbKXdrWtcvxZKqGd"
-   SET @authURI = "https://mcyy-6cm08srlbw8b5cqf86346m1.auth.marketingcloudapis.com/"
-   SET @restURI = "https://mcyy-6cm08srlbw8b5cqf86346m1.rest.marketingcloudapis.com/"
+   SET @RecordTypeId = "012Dd000000GqdCIAS"
+ELSE
+   SET @RecordTypeId = "0124P000000OSkwQAG"
 ENDIF
-
 SET @dateAdded = Now(1)
 SET @dateAdded = SystemDateToLocalDate(@dateAdded)
-SET @embedded = QueryParameter("embedded")
-SET @standaloneImg = Iif(Empty(@embedded), "form-background", "")
-SET @embeddedcss = Iif(Empty(@embedded), "", "embedded")
-
 
  /* --- AFTER SUBMISSION --- */
 IF RequestParameter("sn_form_submit") == "submit" THEN
 
-  SET @tempoConsentSource = concat("[Temporary] ",@consentSource)
-  SET @display = "ThankYou"
+/* -- Need to change -- */
+  SET @campID = "701Jy00000jjBC4IAM"
+  SET @DERecords = "UK-SPM-Imperial-2025"
+  SET @consentSource = "UK-SPM-Imperial-2025-leadform"
+
+  SET @campStatus = "Form filled"
   
-  /* All fields in webform */
-  SET @email = RequestParameter("sn_form_email")
+
+  SET @display = "ThankYou"
   SET @firstName= RequestParameter("sn_form_first_name")
   SET @lastName= RequestParameter("sn_form_last_name")
-  SET @country= RequestParameter("sn_form_country")
-  SET @city= RequestParameter("sn_form_city")
-  SET @phone = RequestParameter("sn_form_phone")
-  SET @profession = RequestParameter("sn_form_profession")
-  SET @specialty = RequestParameter("sn_form_specialty")
-  SET @specialtyOther = RequestParameter("sn_form_specialty_other")
-  SET @postalcode = RequestParameter("sn_form_postalcode") 
-  SET @NPINumber = RequestParameter("sn_form_NPINumber") 
-  SET @street = RequestParameter("sn_form_street") 
-  SET @Company= RequestParameter("sn_form_company")
-  SET @marketingconsent = Iif(not Empty(RequestParameter("marketingconsent")), "True", "False")
-   SET @salesrep = Iif(not Empty(RequestParameter("getintouch")), "True", "False")
-  SET @title = RequestParameter("sn_form_title")
-  
-  
-  
-  /* -- AREA OF INTEREST -- */
-  SET @Interestsall = RequestParameter("areaofinterest") 
-  SET @audiology = Iif(IndexOf(@Interestsall,"audiology") > 0, "true","false")
-  SET @general = Iif(IndexOf(@Interestsall,"general") > 0, "true","false")
-  SET @laryngology = Iif(IndexOf(@Interestsall,"laryngology") > 0, "true","false")
-  SET @rhinology = Iif(IndexOf(@Interestsall,"rhinology") > 0, "true","false")
-  
-  SET @jr_foot_and_ankle = Iif(IndexOf(@Interestsall,"jr_foot_and_ankle") > 0, "true","false")
-  SET @jr_hand_and_wrist = Iif(IndexOf(@Interestsall,"jr_hand_and_wrist") > 0, "true","false")
-  SET @jr_hip = Iif(IndexOf(@Interestsall,"jr_hip") > 0, "true","false")
-  SET @jr_knee = Iif(IndexOf(@Interestsall,"jr_knee") > 0, "true","false")
-  SET @jr_shoulder = Iif(IndexOf(@Interestsall,"jr_shoulder") > 0, "true","false")
-  
-  SET @acute_wounds = Iif(IndexOf(@Interestsall,"acute_wounds") > 0, "true","false")
-  SET @burns = Iif(IndexOf(@Interestsall,"burns") > 0, "true","false")
-  SET @chronic_challenging_wounds = Iif(IndexOf(@Interestsall,"chronic_challenging_wounds") > 0, "true","false")
-  SET @dermatology = Iif(IndexOf(@Interestsall,"dermatology") > 0, "true","false")
-  SET @plastic_surgery = Iif(IndexOf(@Interestsall,"plastic_surgery") > 0, "true","false")
-  SET @podiatry = Iif(IndexOf(@Interestsall,"podiatry") > 0, "true","false")
-  SET @surgical_wounds = Iif(IndexOf(@Interestsall,"surgical_wounds") > 0, "true","false")
-  
-  SET @sm_foot_and_ankle = Iif(IndexOf(@Interestsall,"sm_foot_and_ankle") > 0, "true","false")
-  SET @sm_hand_and_wrist = Iif(IndexOf(@Interestsall,"sm_hand_and_wrist") > 0, "true","false")
-  SET @sm_hip = Iif(IndexOf(@Interestsall,"sm_hip") > 0, "true","false")
-  SET @sm_knee = Iif(IndexOf(@Interestsall,"sm_knee") > 0, "true","false")
-  SET @sm_shoulder = Iif(IndexOf(@Interestsall,"sm_shoulder") > 0, "true","false")
-  
-  SET @lower_limb = Iif(IndexOf(@Interestsall,"lower_limb") > 0, "true","false")
-  SET @upper_limb = Iif(IndexOf(@Interestsall,"upper_limb") > 0, "true","false")
-  SET @abdominal = Iif(IndexOf(@Interestsall,"abdominal") > 0, "true","false")
+  SET @email = RequestParameter("sn_form_email")
+  SET @country= "United Kingdom"
+  SET @interest= RequestParameter("interest")
+  SET @comment= RequestParameter("sn_form_message")
+  SET @consentForm = RequestParameter("marketingconsent")
 
-  /* Contact and Lead match process */
-  SET @contactRows = RetrieveSalesforceObjects("Contact", "Id, Dotdigital_Account__c,Consent_Source__c,Consent_type__c", "Email", "=", @email)
-  SET @leadRows = RetrieveSalesforceObjects("Lead", "Id, Dotdigital_Account__c,Consent_Source__c,Consent_type__c", "Email", "=", @email)
+  set @marketingconsent = Iif(not Empty(@consentForm), "True", "False")
+  
+  
+
+  SET @contactRows = RetrieveSalesforceObjects("Contact", "Id, Dotdigital_Account__c,Consent_Source__c", "Email", "=", @email)
+  SET @leadRows = RetrieveSalesforceObjects("Lead", "Id, Dotdigital_Account__c,Consent_Source__c", "Email", "=", @email)
   
   /* --- CONTACT --- */
   IF RowCount(@contactRows) > 0 THEN
     SET @contactRow = Row(@contactRows, 1)
     SET @id = Field(@contactRow, "Id")
     SET @consentCRM = Field(@contactRow, "Dotdigital_Account__c")
-    SET @consentSourceCRM = Field(@contactRow, "Consent_Source__c") 
-    SET @consentTypeCRM = Field(@contactRow, "Consent_type__c") 
+    SEt @consentSourceCRM = Field(@contactRow, "Consent_Source__c") 
+    set @userType = "Contact" 
     
-    SET @userType = "Contact" 
-    /* Update information on Contact */
-    set @CRMUpdatefunction = concat("UpdateSingleSalesforceObject('Contact',@id,"," ")
-    set @FormFields = "audiology,laryngology,general,rhinology,jr_foot_and_ankle,jr_hip,jr_hand_and_wrist,jr_knee,jr_shoulder,acute_wounds,burns,chronic_challenging_wounds,dermatology,plastic_surgery,podiatry,surgical_wounds,sm_foot_and_ankle,sm_hand_and_wrist,sm_hip,sm_knee,sm_shoulder,lower_limb,upper_limb,abdominal"
-  
-    set @CRMList = "Audiology__c,Laryngology__c,General__c,Rhinology__c,Foot_and_ankle__c,Hip__c,Hand_and_wrist__c,Knee__c,Shoulder__c,Acute_wounds__c,Burns__c,Chronic_Challenging__c,Dermatology__c,Plastic_Surgery__c,Podiatry__c,Surgical_wounds__c,Foot_and_ankle_sm__c,Hand_and_wrist_sm__c,Hip_sm__c,Knee_sm__c,Shoulder_sm__c,Lower_limb__c,Upper_limb__c,Abdominal__c"
-  
-    set @Formrows = BuildRowsetFromString(@FormFields,",")
-    set @rowsCRM = BuildRowsetFromString(@CRMList,",")
-    set @rowCount = rowCount(@Formrows)
-    if @rowCount > 0 then
-      for @i = 1 to @rowCount do
-        var @field
-        set @row = row(@Formrows, @i)
-        set @rowCRM = row(@rowsCRM, @i)
-
-        set @field = field(@row,1)
-        set @FieldCRM = field(@rowCRM,1)
-        
-        SET @ampStr = CONCAT('%%=v(@',@field,')=%%')
-        set @FieldValue = TreatAsContent(@ampStr)
-
-        IF (NOT EMPTY(@FieldValue) AND @FieldValue != 'False') AND @i != @rowCount THEN
-         SET @CRMUpdatefunction = concat(@CRMUpdatefunction,"'",@FieldCRM,"',@",@field,",")
-
-        ELSEIF (NOT EMPTY(@FieldValue) AND @FieldValue != 'False') AND @i == @rowCount THEN
-          SET @CRMUpdatefunction = concat(@CRMUpdatefunction,"'",@FieldCRM,"',@",@field)
-        ENDIF
-      next @i 
-
-      SET @CRMUpdateLen = length(@CRMUpdatefunction)
-      /* 44 is length for empty function (UpdateSingleSalesforceObject('Contact',@id,)); Update only if at least one AOI is selected */
-      IF @CRMUpdateLen != 44 THEN
-        set @LastCharComma = Substring(@CRMUpdatefunction,@CRMUpdateLen, Subtract(IndexOf(@CRMUpdatefunction,","),1))
-
-        IF @LastCharComma == "," THEN
-         SET @CRMUpdatefunction = Substring(@CRMUpdatefunction,1, Subtract(@CRMUpdateLen,1))
-        ENDIF
-
-        SET @CRMUpdatefunction = concat(@CRMUpdatefunction,")")
-        SET @CRMUpdatefunction = CONCAT('%%=v(',@CRMUpdatefunction,')=%%')
-        set @FINALUPDATE = TreatAsContent(@CRMUpdatefunction)
-      ENDIF
-    ENDIF
-  
+    
   /* --- EXISTING LEAD --- */  
   ELSEIF RowCount(@contactRows) == 0 AND RowCount(@leadRows) > 0 THEN
     SET @leadRow = Row(@leadRows, 1)
     SET @id = Field(@leadRow, "Id")
     SET @consentCRM = Field(@leadRow, "Dotdigital_Account__c")
-    SET @consentSourceCRM = Field(@leadRow, "Consent_Source__c") 
-    SET @consentTypeCRM = Field(@leadRow, "Consent_type__c") 
+    SEt @consentSourceCRM = Field(@leadRow, "Consent_Source__c") 
     set @userType = "Lead"
-    
-    
-   /* Update information on exisitng Lead */
-    set @CRMUpdatefunction = concat("UpdateSingleSalesforceObject('Lead',@id,"," ")
-    set @FormFields = "firstName,lastName,country,city,phone,profession,specialty,specialtyOther,postalcode,street,Company,title,audiology,laryngology,general,rhinology,jr_foot_and_ankle,jr_hip,jr_hand_and_wrist,jr_knee,jr_shoulder,acute_wounds,burns,chronic_challenging_wounds,dermatology,plastic_surgery,podiatry,surgical_wounds,sm_foot_and_ankle,sm_hand_and_wrist,sm_hip,sm_knee,sm_shoulder,lower_limb,upper_limb,abdominal"
-  
-  set @CRMList = "FirstName,LastName,Country,City,Phone,Healthcare_Profession__c,Main_Specialty__c,Secondary_Specialty__c,PostalCode,Street,Company,Title,Audiology__c,Laryngology__c,General__c,Rhinology__c,Foot_and_ankle_jr__c,Hip_jr__c,Hand_and_wrist_jr__c,Knee_jr__c,Shoulder_jr__c,Acute_wounds__c,Burns__c,Chronic_Challenging__c,Dermatology__c,Plastic_Surgery__c,Podiatry__c,Surgical_wounds__c,Foot_and_ankle_sm__c,Hand_and_wrist_sm__c,Hip_sm__c,Knee_sm__c,Shoulder_sm__c,Lower_limb__c,Upper_limb__c,Abdominal__c"
-  
-  set @Formrows = BuildRowsetFromString(@FormFields,",")
-  set @rowsCRM = BuildRowsetFromString(@CRMList,",")
-  set @rowCount = rowCount(@Formrows)
-
-
-    if @rowCount > 0 then
-      for @i = 1 to @rowCount do
-        var @field
-        set @row = row(@Formrows, @i)
-        set @rowCRM = row(@rowsCRM, @i)
-
-        set @field = field(@row,1)
-        set @FieldCRM = field(@rowCRM,1)
-        
-        SET @ampStr = CONCAT('%%=v(@',@field,')=%%')
-        set @FieldValue = TreatAsContent(@ampStr)
-
-        IF (NOT EMPTY(@FieldValue) OR @FieldValue != 'False') AND @i != @rowCount THEN
-         SET @CRMUpdatefunction = concat(@CRMUpdatefunction,"'",@FieldCRM,"',@",@field,",")
-
-        ELSEIF (NOT EMPTY(@FieldValue) OR @FieldValue != 'False') AND @i == @rowCount THEN
-          SET @CRMUpdatefunction = concat(@CRMUpdatefunction,"'",@FieldCRM,"',@",@field)
-        ENDIF
-      next @i 
-
-      SET @CRMUpdateLen = length(@CRMUpdatefunction)
-      set @LastCharComma = Substring(@CRMUpdatefunction,@CRMUpdateLen, Subtract(IndexOf(@CRMUpdatefunction,","),1))
-
-      IF @LastCharComma == "," THEN
-       SET @CRMUpdatefunction = Substring(@CRMUpdatefunction,1, Subtract(@CRMUpdateLen,1))
-      ENDIF
-
-      SET @CRMUpdatefunction = concat(@CRMUpdatefunction,")")
-      SET @CRMUpdatefunction = CONCAT('%%=v(',@CRMUpdatefunction,')=%%')
-      set @FINALUPDATE = TreatAsContent(@CRMUpdatefunction)
-    ENDIF
-
-      /* --- NEW LEAD --- */  
+    SET @LeadUpdate = UpdateSingleSalesforceObject(
+                "Lead", @id,
+                "LastName", @lastName,
+                "FirstName", @firstName,
+                "Country",@country
+               )
+               
+  /* --- NEW LEAD --- */  
   ELSE
-   SET @consentTypeCRM = "Single"
-   set @userType = "Lead"
-   SET @company =  Iif(EMPTY(@company), "[Missing]", @company)
-   SET @Id = CreateSalesforceObject("Lead", 41,
+   SET @Id = CreateSalesforceObject("Lead", 8,
                   "RecordTypeId",@RecordTypeId,
                   "Status", "New",
                   "LastName", @lastName, 
                   "FirstName", @firstName,
                   "Email", @email,
-                  "Country", @country,
-                  "Consent_type__c", @consentTypeCRM,
-                  "Dotdigital_Account__c", @marketingconsent,
-                  "Lead_Source_Name__c", @LeadSource,
-                  "Company",@Company,
-                 
-                  "City",@city,
-                  "PostalCode",@postalcode,
-                  "Street",@street,
-                  "Healthcare_Profession__c",@profession,
-                  "Main_Specialty__c",@specialty,
-                  "Secondary_Specialty__c",@specialtyOther,
-                  "Phone",@phone,
-                  "Title",@title,
-                  "Audiology__c", @audiology,
-                  "Laryngology__c", @laryngology,
-                  
-                  "General__c", @general,
-                  "Rhinology__c", @rhinology,
-                  "Foot_and_ankle_jr__c", @jr_foot_and_ankle,
-                  "Hand_and_wrist_jr__c", @jr_hand_and_wrist,
-                  "Hip_jr__c", @jr_hip,
-                  "Knee_jr__c", @jr_knee,
-                  "Shoulder_jr__c", @jr_shoulder,
-                  "Acute_wounds__c", @acute_wounds,
-                  "Burns__c", @burns,
-                  "Chronic_Challenging__c", @chronic_challenging_wounds,
-                  
-                  "Dermatology__c", @dermatology,
-                  "Plastic_Surgery__c", @plastic_surgery,             
-                  "Podiatry__c", @podiatry,
-                  "Surgical_wounds__c", @surgical_wounds,
-                  "Foot_and_ankle_sm__c", @sm_foot_and_ankle,
-                  "Hand_and_wrist_sm__c", @sm_hand_and_wrist,
-                  "Hip_sm__c", @sm_hip,
-                  "Knee_sm__c", @sm_knee,
-                  "Shoulder_sm__c", @sm_shoulder,
-                  "Lower_limb__c", @lower_limb,
-                  
-                  "Upper_limb__c", @upper_limb
+                  "Consent_type__c", "Single",
+                  "Lead_Source_Name__c", @consentSource,
+                  "Country",@country
                 )
+     set @userType = "Lead"
     ENDIF
     
     /* --- Updates --- */
+    set @DEUpdate = insertData(@DERecords,"SubscriberKey", @Id,"Email", @email, "FirstName", @firstName, "LastName", @lastName,"Interest",@Interest,"Consent",@marketingconsent,"Comment",@Comment,"Inserted",@dateAdded,"Country",@country) 
     
-    * Campaign Member process */
-    IF @CRMCampaign == "true" AND NOT EMPTY (@campID) THEN
-      SET @campUser = concat(@userType,"Id")
-      SET @CampMemberRows = RetrieveSalesforceObjects("CampaignMember", "Id", @campUser, "=", @id, "CampaignId", "=", @campID)
-     
-      IF @UpdateCampaignMemberStatus == "true" AND RowCount(@CampMemberRows) > 0 THEN 
-        SET @CampMemberRow = Row(@CampMemberRows, 1)
-        SET @CampMemberId = Field(@CampMemberRow, "Id")
-        SET @createCampMember = UpdateSingleSalesforceObject(
-              "CampaignMember", @CampMemberId,
-              "Status", @campStatus
-            )
-
-      ELSEIF RowCount(@CampMemberRows) < 1 THEN
-        SET @createCampMember = CreateSalesforceObject(
-              "CampaignMember", 3,
-               @campUser, @id,
-              "Status", @campStatus,
-              "CampaignId", @campID
-            )
-      ENDIF
-   ENDIF   
-   
-    
-    /* Double optin logic */ 
-    IF @DoubleOptinProcess == "true" THEN
-      IF (@country == 'Germany' OR @country == 'Switzerland' OR @country == 'Austria') AND @marketingconsent == "True" AND (@consentTypeCRM != "Double" OR @consentTypeCRM != "True") THEN
-       SET @needsDoubleOptIn = "True"
-      ELSE 
-       SET @needsDoubleOptIn = "False"
-      ENDIF
-    ENDIF
-    
-    
-  IF @TemporaryProcess == "true" THEN
-  /* Temporary consent logic */
-    IF (@ConsentCRM != "True" AND @marketingconsent == "True") OR (IndexOf(@consentSourceCRM,"Temporary") > 0 AND @marketingconsent == "True") THEN
-        SET @updateUser = UpdateSingleSalesforceObject(
-                    @userType, @id,
-                    "Dotdigital_Account__c", "True",
-                    "Consent_Source__c", @consentSource,
-                    "Consent_type__c", "Single"
-                  )
-      ELSEIF @consentCRM != "True" AND @marketingconsent == "False" THEN
-        SET @updateUser = UpdateSingleSalesforceObject(
-                    @userType, @id,
-                    "Dotdigital_Account__c", "True",
-                    "Consent_Source__c", @tempoConsentSource,
-                    "Consent_type__c", "Single"
-                  )
-      ENDIF
-  ELSE  
-  /* Standart consent logic */
-    IF @consentCRM != "True" AND @marketingconsent == "True" THEN
+    IF (@consentCRM != "True" AND @marketingconsent == "True") THEN
       SET @updateContact = UpdateSingleSalesforceObject(
                   @userType, @id,
                   "Dotdigital_Account__c", "True",
                   "Consent_Source__c",@consentSource
                 )
+ 
     ENDIF
+   
+    /*Check if CampMember exits; if not create new*/
+    SET @campUser = concat(@userType,"Id")
+    SET @CampMemberRows = RetrieveSalesforceObjects("CampaignMember", "Id", @campUser, "=", @id, "CampaignId", "=", @campID)
+    IF RowCount(@CampMemberRows) < 1 THEN
+      SET @createCampMember = CreateSalesforceObject(
+            "CampaignMember", 3,
+             @campUser, @id,
+            "Status", @campStatus,
+            "CampaignId", @campID
+          )
+    ENDIF
+    
+/* --- Task declaration --- */
+  
+  SET @nowGMT = DateAdd(Now(),7,"h")
+  SET @nowPlus14Days = DateAdd(@nowGMT, 14, "D")
+  SET @nowPlus14Days = Format(@nowPlus14Days,"yyyy-MM-dd")
+  SET @nowPlus7Days = DateAdd(@nowGMT, 7, "D")
+  SET @nowPlus7Days = FormatDate(@nowPlus7Days,"ISO")
+  SET @newline = char(10,2)
+  
+  SET @description = Concat("A new contact requested a sales visit from Imperial Sports Knee Meeting 2025",
+    @newline, "First Name: ", @firstName,
+    @newline, "Last Name: ", @lastName,
+    @newline, "Email: ", @email,
+    @newline, "Product interest: ", @interest,
+    @newline, "Comment sent with the request : ", @comment
+    )
+    /*Task creation*/
+    
+    SET @sellingteam = "SPM"
+    IF @country == "United Kingdom" then
+      SET @newTask = CreateSalesforceObject('task',11,
+        'WhoId',@Id,
+        'ActivityDate',@nowPlus14Days, 
+        'Subject','Sales visit request from Imperial Sports Knee Meeting 2025', 
+        'Status', 'Open',
+        'Priority','High',
+        'Description', @description,
+        'Campaign__c', @campID,
+        'IsReminderSet', 'true',
+        'ReminderDateTime', @nowPlus7Days,
+        'Country__c',@country,
+        'Selling_Team__c',@sellingteam
+      )
+    ENDIF
+   
+ 
   ENDIF
-
 ENDIF
 ]%%
 -->
-<script runat="server">
-  }
-  catch(e){
-    Write(Stringify(e));
-  }
-</script>
-   
-    %%[ /* Insert Data, Task Creation */ ]%%  
-    <div data-type="slot" data-key="amp1" data-allowed-blocks="codesnippetblock" data-label="Add AMPscript here"></div>
+  <script runat="server">
+}catch(e){
+ Write(Stringify(e));
+}
+  </script>
  
-   <title>%%=v(@TabTitle)=%%</title>
-   
-    <style>
-    @media (min-width: 768px){
-    .form .form__wrapper.embedded {  padding-top: 0em; margin-top: 0em;}
-    } 
-    .form .form__wrapper.embedded {  padding-top: 0em; margin-top: 0em;}
-     [data-key='amp1'], [data-key='amp']{
-        background-color: #b3bc007d;
-      }
-     [data-key='header1']{
-        background-color:  #f9d9db94;
-      }
-      [data-key='maincontent']{
-        background-color:  #78c3ed26;
-      }
-      [data-key='col4']{
-        background-color:  #98a6ba33;
-      }
-      [data-key='col5']{
-        background-color:  #fe9f17a3;
-      }
-      
-      .editor-slot-display-design p {
-        color: black !important;
-      }
-      .form fieldset legend {
+  <style>
+    .sr-only {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }  
+    .form fieldset{
         margin-bottom: 1em;
-      }
-      .form fieldset {
-        margin-bottom: 2em;
-      }
-</style>
-   <script runat="server">
-
-  if(Variable.GetValue("@needsDoubleOptIn") === "True"){
-    // IF DOUBLE OPTIN IS NEEDED THEN THE RECORD WILL BE INJECTED TO THE DOUBLE OPT IN JOURNEY FIRST
-    var journeyEntryDefinitionKey = Variable.GetValue("@journeyDefKey")
-    var clientId = Variable.GetValue("@clientid")
-    var clientSecret = Variable.GetValue("@clientSecret")
-    var authURI = Variable.GetValue("@authURI")
-    var restURI = Variable.GetValue("@restURI")
-    var data = {
-      'SubscriberKey': Variable.GetValue("@id"),
-      'EmailAddress': Variable.GetValue("@email"),
-      'opt_in_status': "False",
-      'date_added': Variable.GetValue("@dateAdded")
     }
-
-    var setup = {
-      authBaseURI: authURI,
-      restBaseURI: restURI,
-      clientId: clientId,
-      clientSecret: clientSecret,
-      eventDefinitionKey: journeyEntryDefinitionKey
-   }
-    
-    
-
-    try {
-        var token = getToken(setup);
-        var success = false;
-        if (!!token) success = triggerEvent(token, setup, data);
-    } catch (err) {
-        Write("Error: " + Stringify(err));
+    .form fieldset legend {
+      margin-bottom: 1em;
     }
-
-    function getToken(setup) {
-
-        var config = {
-            url : setup.authBaseURI + "v2/token",
-            contentType : "application/json",
-            payload : {
-                "client_id": setup.clientId,
-                "client_secret": setup.clientSecret,
-                "grant_type": "client_credentials"
-            }
-        }
-
-        var req = HTTP.Post(config.url, config.contentType, Stringify(config.payload));
-
-        if (req.StatusCode == 200) {
-            var res = Platform.Function.ParseJSON(req.Response[0]);
-            return res.access_token;
-        } else {
-            return false;
-        }
-
+    .form input[type=checkbox] ~ label {
+      width: auto;
+      line-height: 1.5;
     }
-
-    function triggerEvent(token, setup, data) {
-
-        var config = {
-            url : setup.restBaseURI + "interaction/v1/events",
-            contentType : "application/json",
-            headerName : ["Authorization"],
-            headerValue : ["Bearer " + token],
-            payload : {
-                ContactKey: data.SubscriberKey,
-                EventDefinitionKey: setup.eventDefinitionKey,
-                Data: data
-            }
-        }
-
-        var req = HTTP.Post(config.url, config.contentType, Stringify(config.payload), config.headerName, config.headerValue);
-
-        if (req.StatusCode == 201) {
-            var res = Platform.Function.ParseJSON(req["Response"][0]);
-            if (res.eventInstanceId != null && res.eventInstanceId != "") return true;
-        } else {
-            return false;
-        }
+    .form input[type=checkbox] {
+     vertical-align: middle;
     }
-  }
-
-  }catch(e){
-    Write(Stringify(e));
-  }
-</script>
+    .form label {
+      display: initial;
+    }
+  </style> 
   </head>
-  <body class="%%=v(@standaloneImg)=%%">
-    %%[ /* HEADER IMAGE */]%%  
+  <body class="form-background">
+    %%[IF EMPTY(@param) THEN]%% 
     <header>
-      <div data-type="slot" data-key="header1" data-allowed-blocks="htmlblock; textblock; imageblock; codesnippetblock" data-label="Add header image here"></div>
-    </header> 
-    <!-- MAIN -->
-    %%[ /* MAIN CONTENT */]%%
-    <main class="viewport__inner ">
-      <article class="alchemy form" data-animation-marked="alchemy:0">
-        <div class="form__wrapper %%=v(@embeddedcss)=%%">
-          <div style="transform: translate(0px, 0px); opacity: 1; width: 100%">
-            <form action="%%=RequestParameter('PAGEURL')=%%" method="post" id="form" class="form">
-              <!-- %%[IF EMPTY(@display) THEN]%% -->
-                   <div data-type="slot" data-key="maincontent" data-label="Add main content blocks here"></div>
-              <!-- %%[ELSE]%% -->
-              
-              %%[ /* THANK YOU MESSAGE */]%%
-              <div data-type="slot" data-key="col4" data-label="Add Thank you message here"></div>
-              <!-- %%[ENDIF]%% -->
-              <input type="hidden" id="DL_formname" name="DL_formname" value="%%=v(@GA4formname)=%%">
-               <input type="hidden" id="DL_formtype" name="DL_formtype" value="%%=v(@GA4formtype)=%%">
-    
-            </form>
+      <div class="header__user-nav" style="opacity: 1; transform: translate(0px, 0px)">
+        <div class="user-nav__inner">
+          <div class="user-nav__brand-mark">
+            <a href="https://www.smith-nephew.com/en">
+              <img class="brand-mark__image" src="https://www.smith-nephew.com/-/media/project/smithandnephew/examples/logo.svg"
+                   alt="Smith+Nephew brand logo">
+            </a>
           </div>
         </div>
+      </div>
+     
+    </header>
+    %%[ENDIF]%% 
+    <main class="viewport__inner">
+      <!-- placeholder: main -->
+     <article class="alchemy form" data-animation-marked="alchemy:0">
+        <div class="form__wrapper">
+          <div style="transform: translate(0px, 0px); opacity: 1; width: 100%">
+            <form action="%%=RequestParameter('PAGEURL')=%%" method="post" id="form" class="form">
+             %%[IF EMPTY(@display) THEN]%%
+              %%[IF EMPTY(@param) THEN]%% 
+              <div style="margin-top: 1rem; margin-bottom:0.75rem;">
+                 <h2>Get in touch</h2>
+              </div>
+             %%[ENDIF]%% 
+              <div class="form__group">
+                <div class="form__element">
+                  <label for="sn_form_first_name" style="height: 19px">First name *</label>
+                  <input id="sn_form_first_name" name="sn_form_first_name" type="text" required>
+                </div>
+                <div class="form__element">
+                  <label for="sn_form_last_name" style="height: 19px">Last name *</label>
+                  <input id="sn_form_last_name" name="sn_form_last_name" type="text" required>
+                </div>
+              </div>
+              <div class="form__element">
+                <label for="sn_form_email" class="">Email Address *</label>
+                <input id="sn_form_email" name="sn_form_email"type="email" required>
+              </div>  
+              
+      
+            
+              <fieldset>
+                  <legend>Interest</legend>
+                <div class="form__text">
+                    <p>Which topic would you like to receive more information about?</p>
+                </div>
+                
+                <div class="form__group form__group--full form__group--checkbox">
+                  
+                  <div class="form__element">
+                  <input type="checkbox" id="interest1" name="interest" value="FAST-FIX FLEX">
+                  <span class="checkbox"></span>
+                  <label for="interest1">FAST-FIX<sup>◊</sup> FLEX</label>
+                  </div>
+                   <div class="form__element">
+                  <input type="checkbox" id="interest2" name="interest" value="ULTRABUTTON">
+                    <span class="checkbox"></span>
+                  <label for="interest2">ULTRABUTTON<sup>◊</sup> </label>
+                  </div>
+                   <div class="form__element">
+                 <input type="checkbox" id="interest3" name="interest" value="QUADTRAC">
+                   <span class="checkbox"></span>
+                 <label for="interest3">QUADTRAC<sup>◊</sup></label>
+                  </div>
+                                      
+                 <div class="form__element">
+                 <input type="checkbox" id="interest4" name="interest" value="Podcast">
+                   <span class="checkbox"></span>
+                 <label for="interest4">Podcast: 30 years of meniscal repair: Expert insights from patient selection to recovery</label>
+                  </div>
+                   <div class="form__element">
+                 <input type="checkbox" id="interest5" name="interest" value="Webinar">
+                     <span class="checkbox"></span>
+                 <label for="interest5">Webinar: 30 years of meniscal repair: Common challenges and solutions</label>
+                  </div>
+                  
+                </div>
+                </fieldset>
+              
+               <div class="form__element">
+                <label for="sn_form_message" style="height: 19px">Comments / questions:</label>
+                <textarea id="sn_form_message" name="sn_form_message" maxlength="4000"></textarea>
+                 <p id="charcounter">4000/4000</p>
+            </div>
+              <div>
+                    <input type="checkbox" id="marketingconsent" name="marketingconsent" value="true">
+                    <label for="marketingconsent">Sign up for marketing updates to stay connected with info about S+N and topics around your areas of interest.</label>
+                
+              </div>
+              
+              <button type="submit" class="cta-button cta-button--primary cta-button--large" name="sn_form_submit" value="submit">
+                <span class="cta-button__label">Submit</span>
+                <span class="cta-button__icon sn-icon-navigation-right"></span>
+              </button>
+              %%[IF EMPTY(@param) THEN]%% 
+                <div class="form__text">
+  <p style="margin-top: 15px;"> 
+                  By submitting this form, I agree to the 
+                  <a href="https://www.smith-nephew.com/en/terms-of-use" target="_blank">terms of use</a>, 
+                  <a href="https://www.smith-nephew.com/en/privacy-notice" target="_blank">S+N privacy policy</a> and 
+                  <a href="https://www.smith-nephew.com/en/privacy-notice" target="_blank">S+N cookie notice.</a> 
+                </p><p><sup>◊</sup> Trademark of Smith+Nephew</p>
+                </div>
+              %%[ELSE]%%
+              <div class="form__text">
+                <p style="margin-top: 15px;"> You can view the S+N "Terms of Use" and "Privacy and Cookies" notice in the links below.</p>
+              </div>
+             
+             %%[ENDIF]%%
+            %%[ELSE]%%
+              <br>
+          <h2>
+          Thank you!
+        </h2>
+          <p>Your form has been successfully submitted.
+          </p>
+        %%[ENDIF]%%
+               <div class="wrap-spinner">
+                <div class="spinner ellipsis-spinner"></div>
+              </div>
+               <input type="hidden" id="DL_formname" name="DL_formname" value="UK-SPM-Imperial-2025-leadform">
+              <input type="hidden" id="DL_formtype" name="DL_formtype" value="lead gen">
+            </form>
+
+            <!-- /place_holder: /main/form-container -->
+          </div>
+        
+        </div>
       </article>
+      <!-- /place_holder: main -->
     </main>
-    
- <!--   %%[
-set @scriptStart = Concat('<','script','>')
-set @scriptEnd = Concat('</','script','>')
-]%% -->
-%%=v(@scriptStart)=%%
-     <div data-type="slot" data-key="col5" data-allowed-blocks="codesnippetblock" data-label="Add script here"></div>
-%%=v(@scriptEnd)=%%
   </body>
-</html>
+  <script>
+console.log("v1");
+$(document).ready(function () {
+  const characterCount = $("#charcounter");
+  const textarea = $("#sn_form_message");
+  textarea.on('input', function () {
+      const currentCount = textarea.val().length;
+      const remainingChars = 4000 - currentCount;
+      characterCount.text(`${remainingChars}/4000`);
+    });
+});
+    
+  </script>
+
