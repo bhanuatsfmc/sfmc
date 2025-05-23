@@ -1,5 +1,5 @@
-
-
+<!DOCTYPE html>
+<html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
       }
    </style>
    
-      <div data-type="slot" data-key="amp" data-allowed-blocks="codesnippetblock" data-label="Add AMPscript here"></div>
+      <div data-type="slot" data-key="amp" data-label="Add AMPscript here" data-allowed-blocks="codesnippetblock"></div>
     
     
     <script runat="server">
@@ -358,7 +358,7 @@ ENDIF
 </script>
    
     %%[ /* Insert Data, Task Creation */ ]%%  
-    <div data-type="slot" data-key="amp1" data-allowed-blocks="codesnippetblock" data-label="Add AMPscript here"></div>
+    <div data-type="slot" data-key="amp1" data-label="Add AMPscript here" data-allowed-blocks="codesnippetblock"></div>
  
    <title>%%=v(@TabTitle)=%%</title>
    
@@ -483,7 +483,7 @@ ENDIF
   <body class="%%=v(@standaloneImg)=%%">
     %%[ /* HEADER IMAGE */]%%  
     <header>
-      <div data-type="slot" data-key="header1" data-allowed-blocks="htmlblock; textblock; imageblock; codesnippetblock" data-label="Add header image here"></div>
+      <div data-type="slot" data-key="header1" data-label="Add header image here" data-allowed-blocks="htmlblock; textblock; imageblock; codesnippetblock"></div>
     </header> 
     <!-- MAIN -->
     %%[ /* MAIN CONTENT */]%%
@@ -513,7 +513,7 @@ set @scriptStart = Concat('<','script','>')
 set @scriptEnd = Concat('</','script','>')
 ]%% -->
 %%=v(@scriptStart)=%%
-     <div data-type="slot" data-key="col5" data-allowed-blocks="codesnippetblock" data-label="Add script here"></div>
+     <div data-type="slot" data-key="col5" data-label="Add script here" data-allowed-blocks="codesnippetblock"></div>
 %%=v(@scriptEnd)=%%
   </body>
-
+</html>
