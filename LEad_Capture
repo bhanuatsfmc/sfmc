@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html>
+<head><title></title><meta name="ROBOTS" content="INDEX,FOLLOW"><meta name="keywords" content=""><meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style class="main_style">
+.layout-canvas-g {
+  background-color: #fff;
+  border: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+}
+.layout-canvas-g > .header,
+.layout-canvas-g > .section,
+.layout-canvas-g > .footer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  word-wrap: break-word;
+}
+.layout-canvas-g > .section {
+  margin: 10px 0;
+}
+.layout-canvas-g > .section > .columns {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+body {
+  color: #000;
+  font-family: Arial;
+  font-size: 12px;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+@media only screen and (max-width: 480px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+  .responsive-td {
+    width: 100% !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+}
+.layout-canvas-g > .section > .columns {
+  width: 100%;
+}
+
+</style>
+
+</head>
+<body>
+<div class="layout layout-canvas-g">
+	<div class="section">
+		<div class="columns col1">
+			<table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner">
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.smith-nephew.com/assets/head/?v=lCtdyL9hWcNhgOrwD6wZ5SkrHpECjEkDkcl0QP06bh81">
+    <link rel="icon" href = "https://image.digital.smith-nephew.com/lib/fe3211737364047e751177/m/1/48107551-6b7e-419f-9ad3-2676a4239229.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cloud.digital.smith-nephew.com/datalayer" type="text/javascript"></script>
+    <title>UK_WebinarREGENETEN_2024 - contact form</title>
+    
+    <!--
+
+-->
+    
+    
+    <style>
+       .sr-only {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      } 
+      .form fieldset{
+        margin-bottom: 1em;
+      }
+      .form fieldset legend {
+        margin-bottom: 1em;
+      }
+      .form input[type=checkbox] ~ label {
+        width: auto;
+        line-height: 1.5;
+      }
+      .form input[type=checkbox] {
+        vertical-align: middle;
+      }
+      .form label {
+        display: initial;
+      }      
+      .form .form__wrapper {
+        padding-top: 0em;
+      }
+      @media (min-width: 768px) {
+        .form .form__wrapper, .form.alchemy {
+          padding-top: 0em;
+          padding-bottom: 0em;
+        }
+      }
+    </style> 
+  </head>
+  <body>
+   
+    <header>
+      <div class="header__user-nav" style="opacity: 1; transform: translate(0px, 0px)">
+        <div class="user-nav__inner">
+          <div class="user-nav__brand-mark">
+            <a href="https://www.smith-nephew.com/en">
+              <img class="brand-mark__image" src="https://www.smith-nephew.com/-/media/project/smithandnephew/examples/logo.svg"
+                   alt="Smith+Nephew brand logo">
+            </a>
+          </div>
+        </div>
+      </div>
+     
+    </header>
+       
+    
+              
+    <main class="viewport__inner">
+      <!-- placeholder: main -->
+      <article class="alchemy form" data-animation-marked="alchemy:0">
+        <div class="form__wrapper">
+           
+          <div
+            class=""
+            data-animation-transform="unset"
+            style="transform: translate(0px, 0px); opacity: 1"
+          >
+            <!-- placeholder: /main/form-container -->
+           
+            <form action="https://cloud.digital.smith-nephew.com/S_N_Git_code_ht?pagename=UKINOR_Live_2025" method="post" id="form" class="form">
+             
+              
+             <div style="margin-top: 1rem; margin-bottom:0.75rem;">
+                 <h3>Fill in the form below to be the first to hear about our upcoming Ruiz Iban webinar and other exciting developments or to request a visit with your local representative.</h3>
+              </div>
+                            
+              
+              
+              
+              <div class="form__group">
+                <div class="form__element">
+                  <label for="sn_form_first_name" style="height: 19px">First name *</label>
+                  <input id="sn_form_first_name" name="sn_form_first_name" type="text" required>
+                </div>
+                <div class="form__element">
+                  <label for="sn_form_last_name" style="height: 19px">Last name *</label>
+                  <input id="sn_form_last_name" name="sn_form_last_name" type="text" required>
+                </div>
+              </div>
+              <div class="form__element">
+                <label for="sn_form_email" class="">Work email *</label>
+                <input id="sn_form_email" name="sn_form_email"type="email" required>
+              </div>
+              <div class="form__element">
+                <label for="sn_form_country">Country *</label>
+                <div class="dropdown--full-width">
+                  <select id="sn_form_country" name="sn_form_country" class="select-dropdown" required>
+                    <option value="">Please Select</option>
+                    <option value="Afghanistan">Afghanistan</option>
+                    <option value="Albania">Albania</option>
+                    <option value="Algeria">Algeria</option>
+                    <option value="American Samoa">American Samoa</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Antarctica">Antarctica</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Azerbaijan">Azerbaijan</option>
+                    <option value="Bahrain">Bahrain</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="Belarus">Belarus</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Belize">Belize</option>
+                    <option value="Bosnia And Herzegovina"> Bosnia And Herzegovina</option>
+                    <option value="Botswana">Botswana</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Brunei">Brunei</option>
+                    <option value="Brunei Darussalam">Brunei Darussalam</option>
+                    <option value="Bulgaria">Bulgaria</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Chile">Chile</option>
+                    <option value="China">China</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Congo">Congo</option>
+                    <option value="Costa Rica">Costa Rica</option>
+                    <option value="Croatia">Croatia</option>
+                    <option value="Cyprus">Cyprus</option>
+                    <option value="Czech Republic">Czech Republic</option>
+                    <option value="Czechia">Czechia</option>
+                    <option value="Democratic Republic of Congo"> Democratic Republic of Congo </option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Dominican Republic"> Dominican Republic</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="Egypt">Egypt</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="Estonia">Estonia</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Finland">Finland</option>
+                    <option value="France">France</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Greece">Greece</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Iceland">Iceland</option>
+                    <option value="India">India</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Iran">Iran</option>
+                    <option value="Iraq">Iraq</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Isreal">Isreal</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Jordan">Jordan</option>
+                    <option value="Kazakhstan">Kazakhstan</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Korea, Republic Of"> Korea, Republic Of </option>
+                    <option value="Kosovo">Kosovo</option>
+                    <option value="Kuwait">Kuwait</option>
+                    <option value="Latvia">Latvia</option>
+                    <option value="Lebanon">Lebanon</option>
+                    <option value="Libya">Libya</option>
+                    <option value="Lithuania">Lithuania</option>
+                    <option value="Luxembourg">Luxembourg</option>
+                    <option value="Macao">Macao</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Malta">Malta</option>
+                    <option value="Mauritius">Mauritius</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Moldova">Moldova</option>
+                    <option value="Mongolia">Mongolia</option>
+                    <option value="Montenegro">Montenegro</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Myanmar">Myanmar</option>
+                    <option value="Namibia">Namibia</option>
+                    <option value="Nepal">Nepal</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Oman">Oman</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Panama">Panama</option>
+                    <option value="Papua New Guinea">Papua New Guinea</option>
+                    <option value="Paraguay">Paraguay</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Puerto Rico">Puerto Rico</option>
+                    <option value="Qatar">Qatar</option>
+                    <option value="Romania">Romania</option>
+                    <option value="Russia">Russia</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Serbia">Serbia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Slovakia">Slovakia</option>
+                    <option value="Slovenia">Slovenia</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Sri Lanka">Sri Lanka</option>
+                    <option value="Sudan">Sudan</option>
+                    <option value="Swaziland">Swaziland</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Tanzania">Tanzania</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="Tonga">Tonga</option>
+                    <option value="Tunisia">Tunisia</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="Uganda">Uganda</option>
+                    <option value="Ukraine">Ukraine</option>
+                    <option value="United Arab Emirates"> United Arab Emirates</option>
+                    <option value="United Kingdom" selected>United Kingdom</option>
+                    <option value="United States of America"> United States of America</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Uzbekistan">Uzbekistan</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Vietnam">Vietnam</option>
+                    <option value="Yemen">Yemen</option>
+                    <option value="Zambia">Zambia</option>
+                    <option value="Zimbabwe">Zimbabwe</option>
+                  </select>
+                  <span class="sn-icon-arrow-up"></span>
+                </div>
+              </div>
+              <div class="form__element">
+                <label for="sn_form_company" class="">Company / Hospital / Organization name *</label>
+                <input id="sn_form_company" name="sn_form_company" type="text" required>
+              </div>
+              <div class="form__element">
+                <label for="sn_form_city" class="">City (Work Address) *</label>
+                <input id="sn_form_city" name="sn_form_city" type="text" required>
+              </div>
+              <div class="form__element">
+                <label for="sn_form_profession">Profession *</label>
+                <div class="dropdown--full-width">
+                  <select id="sn_form_profession" name="sn_form_profession" class="select-dropdown" required>
+                    <option value="">Please Select</option>
+                    <option value="Surgeon">Surgeon</option>
+                    <option value="Physiotherapist">Physiotherapist</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <span class="sn-icon-arrow-up"></span>
+                </div>
+              </div>
+             
+              <div class="form__element">
+                 <label for="sn_form_comment" style="height: 19px">Comment</label>
+                <textarea id="sn_form_comment" name="sn_form_comment" maxlength="1000"></textarea>
+                <p id="charcounter">1000/1000</p>
+              </div>
+              <div class="form__element">
+                <input type="checkbox" id="sn_form_visitreq" name="sn_form_visitreq">
+                <span class="checkbox"></span>
+                <label for="sn_form_visitreq">I would like to request a visit.</label>
+              </div>
+              <div>
+                <div class="form__group form__group--full form__group--checkbox">
+                  <div class="form__element">
+                    <input type="checkbox" id="marketingconsent" name="marketingconsent" value="true">
+                    <span class="checkbox"></span>
+                    <label for="marketingconsent">
+                      <p>Sign up for marketing updates to stay connected with info about S+N and topics around your areas of interest. 
+                      </p>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form__element">
+                <p style="margin-top: 15px;"> 
+                  By submitting this form, I agree to the 
+                  <a href="https://www.smith-nephew.com/en/terms-of-use" target="_blank">terms of use</a>, 
+                  <a href="https://www.smith-nephew.com/en-gb/privacy-notice" target="_blank">S+N privacy policy</a> and 
+                  <a href="https://www.smith-nephew.com/en-gb/privacy-notice" target="_blank">S+N cookie notice</a> and acknowledge that S+N will be processing my personal data to send me communications, updates and content in relation to the purpose of the form.
+                </p>
+              </div>
+              <button type="submit" class="cta-button cta-button--primary cta-button--large" name="sn_form_submit" value="submit">
+                <span class="cta-button__label">Submit</span>
+                <span class="cta-button__icon sn-icon-navigation-right"></span>
+              </button>
+              
+              <div class="wrap-spinner">
+                <div class="spinner ellipsis-spinner">
+                </div>
+              </div>
+              <input type="hidden" id="DL_formname" name="DL_formname" value="UK - REGENETEN Webinar - Lead 1 – 2024">
+              <input type="hidden" id="DL_formtype" name="DL_formtype" value="lead gen">
+            </form>
+            <!-- /place_holder: /main/form-container -->
+          </div>
+          
+        </div>
+      </article>
+      <!-- /place_holder: main -->
+    </main>
+  </body>
+ 
+  <script>
+    $(document).ready(function () {
+      const characterCount = $("#charcounter");
+      const textarea = $("#sn_form_comment");
+      textarea.on('input', function () {
+        const currentCount = textarea.val().length;
+        const remainingChars = 1000 - currentCount;
+        characterCount.text(`${remainingChars}/1000`);
+      } );
+      console.log("v3");
+    });
+    
+    
+  </script>
+</html>
+
+</td></tr></table>
+		</div>
+	</div>
+</div>
+</body>
+</html>
