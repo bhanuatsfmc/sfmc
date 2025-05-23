@@ -253,7 +253,7 @@ ENDIF
                 </div>
               </div>
               <div class="form__element">
-                <label for="sn_form_email" class="">Email Address *</label>
+                <label for="sn_form_email" class="">EmailAddress *</label>
                 <input id="sn_form_email" name="sn_form_email"type="email" required>
               </div>  
              <div class="form__element">
