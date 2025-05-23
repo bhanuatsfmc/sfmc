@@ -324,7 +324,7 @@ ENDIF
               
               <div class="form__group">
                 <div class="form__element">
-                  <label for="sn_form_first_name" style="height: 19px">First name *</label>
+                  <label for="sn_form_first_name" style="height: 19px">First Name *</label>
                   <input id="sn_form_first_name" name="sn_form_first_name" type="text" required>
                 </div>
                 <div class="form__element">
