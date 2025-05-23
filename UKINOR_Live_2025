@@ -1,5 +1,5 @@
 
-<html>
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -516,4 +516,4 @@ set @scriptEnd = Concat('</','script','>')
      <div data-type="slot" data-key="col5" data-allowed-blocks="codesnippetblock" data-label="Add script here"></div>
 %%=v(@scriptEnd)=%%
   </body>
-</html>
+
